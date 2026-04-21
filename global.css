@@ -300,13 +300,21 @@ a:hover, a.active { color: var(--black); }
   font-weight: 700;
   font-size: 16px;
   color: var(--red);
+  background: transparent;
   border: 1.5px solid var(--red);
   border-radius: 8px;
   padding: 8px 20px;
-  transition: background 0.15s, color 0.15s;
+  transition: none;
   cursor: pointer;
 }
-.btn-outline:hover { background: var(--red); color: var(--white); }
+.btn-outline:hover {
+  background: transparent;
+  color: var(--black);
+  border-color: var(--black);
+}
+.btn-outline:hover .btn-arrow {
+  filter: brightness(0);
+}
 
 /* --- Arrow icon in buttons --------------------------------- */
 .btn-arrow {
