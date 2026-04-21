@@ -77,54 +77,47 @@
     .home-section__inner {
       max-width: var(--page-width);
       margin: 0 auto;
-      padding: 80px var(--gap);
+      padding: 40px var(--gap);
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 0;
     }
-    /* Left-aligned: content in left column */
-    .home-section__inner .home-section__content { grid-column: 1; }
-    /* Right-aligned: content in right column */
-    .home-section--right .home-section__inner .home-section__content { grid-column: 2; }
-    .home-section--right .home-section__inner .home-section__content { text-align: left; }
-    /* Right-aligned sections (Opening Hours, Menue) */
-    .home-section--right {
+    /* Left sections — content right-aligned to center */
+    .home-section .home-section__content {
+      grid-column: 1;
       text-align: right;
+      padding-right: 48px;
     }
-    .home-section--right .hours-table {
-      margin-left: auto;
+    /* Right sections — content left-aligned from center */
+    .home-section--right .home-section__content {
+      grid-column: 2;
+      text-align: left;
+      padding-left: 48px;
     }
-    .home-section--right .hours-table td {
-      text-align: left; /* keep table cells left-aligned for readability */
-    }
-    .home-section--right .menue-teaser p {
-      text-align: right;
-    }
-    .home-section--right .btn-outline {
-      margin-left: auto;
-      display: inline-flex;
-    }
+    .home-section--right .hours-table { margin-left: 0; }
 
     /* ── Section headings ── */
     .home-section__title {
       font-family: var(--font-display);
       font-weight: 600;
-      font-size: clamp(28px, 4vw, 48px);
+      font-size: clamp(20px, 3vw, 36px);
       letter-spacing: var(--tracking-display);
       text-transform: uppercase;
       color: var(--red);
-      margin-bottom: 32px;
+      margin-bottom: 12px;
     }
 
     /* ── Opening Hours ── */
     .hours-table { width: 100%; border-collapse: collapse; }
+    .hours-table { border-collapse: collapse; }
     .hours-table td {
       font-family: var(--font-body);
-      font-size: var(--fs-body-lg);
-      padding: 6px 24px 6px 0;
+      font-size: var(--fs-body);
+      line-height: 1.2;
+      padding: 3px 24px 3px 0;
       color: var(--black);
       vertical-align: top;
     }
+    .hours-table tr { height: auto; }
     .hours-table td:first-child { color: var(--gray-text); min-width: 120px; }
     .hours-table td:nth-child(2) { font-weight: 700; min-width: 160px; }
     .hours-table td:nth-child(3) { color: var(--gray-text); }
@@ -219,7 +212,15 @@
     .home-jobs__inner {
       width: 50%;
     }
-    .home-jobs .home-section__title { color: var(--red); margin-bottom: 24px; }
+    .home-jobs .home-section__title {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: clamp(20px, 3vw, 36px);
+      letter-spacing: var(--tracking-display);
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 12px;
+    }
     .jobs-list { list-style: none; padding: 0; margin: 0 0 32px; }
     .jobs-list li {
       border-bottom: 1px solid rgba(0,0,0,0.1);
@@ -272,11 +273,30 @@
       max-width: var(--page-width);
       margin: 0 auto;
       padding: 80px var(--gap);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
     }
-    .home-section--right .home-section__inner { text-align: right; }
+    .home-section--right .home-section__inner {
+      max-width: var(--page-width);
+      margin: 0 auto;
+      padding: 80px var(--gap);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+    }
     .home-section--right .hours-table { margin-left: auto; }
     .home-section--right .btn-outline { margin-left: auto; display: inline-flex; }
-      .hours-table td { font-size: var(--fs-body); padding-right: 12px; }
+      .hours-table { border-collapse: collapse; }
+    .hours-table td {
+      font-family: var(--font-body);
+      font-size: var(--fs-body);
+      line-height: 1.2;
+      padding: 3px 24px 3px 0;
+      color: var(--black);
+      vertical-align: top;
+    }
+    .hours-table tr { height: auto; }
     }
   </style>
   <!-- JSON-LD Structured Data -->
@@ -365,7 +385,9 @@
   </nav>
 
   <!-- GRADIENT FADER UNDER NAV -->
-  
+  <div style="position:sticky;top:var(--nav-height);z-index:89;pointer-events:none;margin-bottom:-30px;width:100%;height:30px;">
+    <img src="images/backgrounds/yy_gradient_fader_nav.png" alt="" style="width:100%;height:100%;object-fit:fill;display:block;">
+  </div>
 
   <!-- HERO -->
   <div class="home-hero">
@@ -531,7 +553,7 @@
     const plane    = document.querySelector('.home-plane');
     const hero     = document.querySelector('.home-hero');
     const menuLink = document.querySelector('.site-nav__links--left a:first-child');
-    const PARALLAX = 0.07; // tune: lower = less movement upward
+    const PARALLAX = 0.18; // perfekter wert — nicht ändern
 
     const navH     = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-height')) || 100;
     const startTop = navH + 60;
