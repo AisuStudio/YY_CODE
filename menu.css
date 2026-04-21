@@ -1,0 +1,315 @@
+/* ============================================================
+   YAM YAM BERLIN — menu.css
+   Menu page: category nav, dish cards, drink list, grid
+   ============================================================ */
+
+/* --- Category Nav (sticky sub-nav) ------------------------- */
+.menu-nav {
+  position: sticky;
+  top: var(--nav-height);
+  z-index: 90;
+  background: var(--white);
+  border-bottom: 1px solid var(--gray-light);
+}
+.menu-nav__inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--gap);
+  display: flex;
+  gap: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.menu-nav__inner::-webkit-scrollbar { display: none; }
+
+.menu-nav__btn {
+  flex-shrink: 0;
+  padding: 14px 20px;
+  font-family: var(--font-display);
+  font-size: 18px;
+  color: var(--gray-mid);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-display);
+  border-bottom: 2px solid transparent;
+  transition: color 0.15s, border-color 0.15s;
+  white-space: nowrap;
+}
+.menu-nav__btn:hover { color: var(--black); }
+.menu-nav__btn.active {
+  color: var(--red);
+  border-bottom-color: var(--red);
+}
+
+/* --- Page wrapper ------------------------------------------ */
+.menu-page {
+  padding-top: 0;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 48px var(--gap) 0;
+}
+
+/* --- Loading state ----------------------------------------- */
+.menu-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  font-family: var(--font-display);
+  font-size: 24px;
+  color: var(--red);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* --- Section ----------------------------------------------- */
+.menu-section {
+  margin-bottom: 72px;
+  scroll-margin-top: calc(var(--nav-height) + 52px);
+}
+.menu-section__header {
+  margin-bottom: 32px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--red);
+}
+.menu-section__title {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 4vw, 48px);
+  color: var(--red);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-display);
+  line-height: 1;
+}
+.menu-section__subtitle {
+  font-family: var(--font-accent);
+  font-style: italic;
+  font-size: 13px;
+  color: var(--gray-text);
+  margin-top: 6px;
+}
+
+/* Info box (e.g. Lunch info, Daily Specials info) */
+.menu-info-box {
+  background: var(--bg);
+  padding: 20px 24px;
+  margin-bottom: 32px;
+  border-left: 3px solid var(--red);
+}
+.menu-info-box p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--black);
+}
+.menu-info-box p + p { margin-top: 6px; color: var(--gray-text); }
+.menu-info-box .price-pill { margin-top: 12px; }
+
+/* --- Dish Card Grid ---------------------------------------- */
+.dish-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--gap);
+}
+
+/* Dish Card */
+.dish-card {
+  display: flex;
+  flex-direction: column;
+}
+.dish-card__img-wrap {
+  min-height: 180px;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--bg);
+  margin-bottom: 12px;
+}
+.dish-card__img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+.dish-card:hover .dish-card__img-wrap img { transform: scale(1.03); }
+
+/* Placeholder when no image */
+.dish-card__img-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+  color: var(--gray-mid);
+  font-size: 11px;
+  font-family: var(--font-body);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.dish-card__body { flex: 1; display: flex; flex-direction: column; gap: 5px; }
+
+.dish-card__title-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.dish-card__id {
+  font-family: var(--font-display);
+  font-size: clamp(16px, 1.8vw, 22px);
+  color: var(--red);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-display);
+  line-height: 1.1;
+  flex-shrink: 0;
+}
+.dish-card__zusatz {
+  font-family: var(--font-body);
+  font-size: 11px;
+  color: var(--gray-mid);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.dish-card__icons { display: flex; gap: 4px; margin-left: auto; }
+
+.dish-card__desc-en {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--black);
+}
+.dish-card__desc-de {
+  font-family: var(--font-body);
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--gray-text);
+}
+.dish-card__allergene {
+  font-size: 10px;
+  color: var(--gray-mid);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.dish-card__footer {
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.dish-card__accent {
+  font-family: var(--font-accent);
+  font-style: italic;
+  font-size: 12px;
+  color: var(--red);
+}
+
+/* --- Drink List Layout ------------------------------------- */
+.drink-list {
+  display: flex;
+  flex-direction: column;
+}
+.drink-row {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 12px 16px;
+  align-items: baseline;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--gray-light);
+}
+.drink-row:last-child { border-bottom: none; }
+
+.drink-row__name {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--black);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.drink-row__desc {
+  font-size: 12px;
+  color: var(--gray-text);
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+  display: block;
+  margin-top: 2px;
+}
+.drink-row__volume {
+  font-size: 12px;
+  color: var(--gray-mid);
+  white-space: nowrap;
+  text-align: right;
+}
+.drink-row__price {
+  font-family: var(--font-accent);
+  font-size: 14px;
+  color: var(--red);
+  white-space: nowrap;
+  text-align: right;
+  min-width: 60px;
+}
+
+/* Sub-headers within drink sections (e.g. Steamed / Fried) */
+.drink-subheader {
+  font-family: var(--font-display);
+  font-size: 16px;
+  color: var(--black);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 20px 0 8px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--gray-light);
+}
+
+/* Premium liquor: wider description */
+.drink-row--premium {
+  grid-template-columns: 120px 1fr auto auto;
+}
+.drink-row__type {
+  font-family: var(--font-display);
+  font-size: 13px;
+  color: var(--black);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* --- Extras table ------------------------------------------ */
+.extras-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 8px 24px;
+}
+.extras-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--gray-light);
+  font-size: 13px;
+}
+.extras-row__name { font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; }
+.extras-row__price { font-family: var(--font-accent); color: var(--red); }
+
+/* --- Responsive -------------------------------------------- */
+@media (max-width: 1200px) {
+  .dish-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 900px) {
+  .dish-grid { grid-template-columns: repeat(2, 1fr); }
+  .drink-row { grid-template-columns: 1fr auto; }
+  .drink-row__volume { display: none; }
+  .drink-row--premium { grid-template-columns: 1fr auto; }
+  .drink-row__type { grid-column: 1; }
+}
+@media (max-width: 600px) {
+  .dish-grid { grid-template-columns: 1fr; }
+  .menu-section { margin-bottom: 48px; }
+  .menu-nav__btn { font-size: 15px; padding: 12px 14px; }
+}
+@media (orientation: landscape) and (max-width: 900px) {
+  .dish-grid { grid-template-columns: repeat(2, 1fr); }
+}

@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YamYam Berlin · Home of Korean Food</title>
+  <meta name="description" content="YamYam Berlin — Authentic Korean food in the heart of Berlin since 2009.">
+  <link rel="stylesheet" href="global.css">
+  <style>
+    /* ── Page base ── */
+    body { margin: 0; overflow-x: hidden; }
+
+    /* ── Hero / Seoul BG ── */
+    .home-hero {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      background: var(--bg);
+      overflow: hidden;
+    }
+    .home-hero__bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+    .home-hero__bg img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+
+    /* ── Gradient fader under nav ── */
+    .nav-fader {
+      position: sticky;
+      top: var(--nav-height);
+      left: 0; right: 0;
+      height: 60px;
+      z-index: 90;
+      pointer-events: none;
+      margin-bottom: -60px;
+    }
+    .nav-fader img { width: 100%; height: 100%; object-fit: fill; }
+
+    /* ── Plane animation ── */
+    .home-plane {
+      position: fixed;
+      top: 18vh;
+      left: 0;
+      z-index: 5;
+      width: 80px;
+      height: 24px;
+      pointer-events: none;
+      transform: translateX(-20vw);
+      opacity: 0;
+    }
+
+    /* ── Content sits on top of BG ── */
+    .home-content {
+      position: relative;
+      z-index: 3;
+      padding-top: var(--nav-height);
+    }
+
+    /* ── Section base ── */
+    .home-section {
+      position: relative;
+      padding: 80px var(--gap);
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* ── Gradient fader between sections ── */
+    .section-fader {
+      width: 100%;
+      height: 80px;
+      pointer-events: none;
+    }
+    .section-fader img { width: 100%; height: 100%; object-fit: fill; }
+
+    /* ── Section headings ── */
+    .home-section__title {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: clamp(28px, 4vw, 48px);
+      letter-spacing: var(--tracking-display);
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 32px;
+    }
+
+    /* ── Opening Hours ── */
+    .hours-table { width: 100%; border-collapse: collapse; }
+    .hours-table td {
+      font-family: var(--font-body);
+      font-size: var(--fs-body-lg);
+      padding: 6px 24px 6px 0;
+      color: var(--black);
+      vertical-align: top;
+    }
+    .hours-table td:first-child { color: var(--gray-text); min-width: 120px; }
+    .hours-table td:nth-child(2) { font-weight: 700; min-width: 160px; }
+    .hours-table td:nth-child(3) { color: var(--gray-text); }
+
+    /* ── Location ── */
+    .location-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+    .location-address {
+      font-family: var(--font-body);
+      font-size: var(--fs-body-lg);
+      line-height: 1.8;
+      color: var(--black);
+    }
+    .location-address strong { display: block; font-weight: 700; margin-bottom: 4px; }
+    .location-phone {
+      display: block;
+      margin-top: 16px;
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: var(--tracking-display);
+      color: var(--red);
+      transition: color 0.15s;
+    }
+    .location-phone:hover { color: var(--black); }
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 20px;
+      font-family: var(--font-accent);
+      font-style: italic;
+      font-weight: 700;
+      font-size: 16px;
+      color: var(--red);
+      border: 1.5px solid var(--red);
+      padding: 8px 20px;
+      border-radius: 2px;
+      transition: background 0.15s, color 0.15s;
+    }
+    .btn-outline:hover { background: var(--red); color: var(--white); }
+    .btn-outline .arrow { font-style: normal; font-weight: 700; }
+
+    /* ── Menue teaser ── */
+    .menue-teaser p {
+      font-family: var(--font-body);
+      font-size: var(--fs-body-lg);
+      line-height: 1.8;
+      color: var(--black);
+      margin-bottom: 4px;
+    }
+
+    /* ── About ── */
+    .about-inner { max-width: 600px; margin: 0 auto; text-align: center; }
+    .about-inner p {
+      font-family: var(--font-body);
+      font-size: var(--fs-body-lg);
+      line-height: 1.8;
+      color: var(--black);
+      margin-bottom: 16px;
+    }
+
+    /* ── Jobs section ── */
+    .home-jobs {
+      position: relative;
+      overflow: hidden;
+      background: var(--bg);
+      padding: 80px var(--gap);
+    }
+    .home-jobs__bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .home-jobs__bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      opacity: 0.35;
+    }
+    .home-jobs__content {
+      position: relative;
+      z-index: 1;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: flex-end;
+    }
+    .home-jobs__inner {
+      width: 50%;
+    }
+    .home-jobs .home-section__title { color: var(--red); margin-bottom: 24px; }
+    .jobs-list { list-style: none; padding: 0; margin: 0 0 32px; }
+    .jobs-list li {
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+      padding: 12px 0;
+    }
+    .jobs-list li strong {
+      display: block;
+      font-family: var(--font-body);
+      font-size: var(--fs-body-lg);
+      font-weight: 700;
+      color: var(--black);
+    }
+    .jobs-list li span {
+      font-family: var(--font-body);
+      font-size: var(--fs-body);
+      color: var(--gray-text);
+    }
+
+    /* ── Footer ── */
+    .home-footer {
+      background: var(--bg);
+      border-top: 1px solid var(--red);
+      padding: 24px var(--gap);
+    }
+    .home-footer__inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .home-footer__logo img { height: 32px; }
+    .home-footer__copy { font-size: 11px; color: var(--black); }
+    .home-footer__link {
+      font-size: 11px;
+      color: var(--red);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      transition: color 0.15s;
+    }
+    .home-footer__link:hover { color: var(--black); }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .location-inner { grid-template-columns: 1fr; }
+      .about-inner { grid-template-columns: 1fr; }
+      .home-jobs__content { grid-template-columns: 1fr; }
+      .home-plane {
+      position: fixed;
+      top: 18vh;
+      left: 0;
+      z-index: 5;
+      width: 80px;
+      height: 24px;
+      pointer-events: none;
+      transform: translateX(-20vw);
+      opacity: 0;
+    }
+    }
+    @media (max-width: 600px) {
+      .home-section { padding: 48px var(--gap); }
+      .hours-table td { font-size: var(--fs-body); padding-right: 12px; }
+    }
+  </style>
+</head>
+<body style="padding-top: 0">
+
+  <!-- NAV -->
+  <nav class="site-nav" role="navigation" aria-label="Main navigation">
+    <div class="site-nav__inner">
+      <ul class="site-nav__links site-nav__links--left" role="list">
+        <li><a href="menu.html">Menue</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="jobs.html">Jobs</a></li>
+      </ul>
+      <a href="index.html" class="site-nav__logo" aria-label="YamYam Berlin Home">
+        <img src="images/logos/YY_Logo_Red.svg" alt="YamYam Berlin">
+      </a>
+      <ul class="site-nav__links site-nav__links--right" role="list">
+        <li><a href="https://app.resmio.com/yamyam-berlin/widget" target="_blank" rel="noopener">Reserve</a></li>
+        <li><a href="https://wolt.com/en/deu/berlin/restaurant/yamyam" target="_blank" rel="noopener">Order Online</a></li>
+        <li>
+          <a href="https://www.instagram.com/yamyamberlin" target="_blank" rel="noopener" class="site-nav__ig" aria-label="Instagram">
+            <img src="images/icons/ig_icon.svg" alt="Instagram" width="28" height="28">
+          </a>
+        </li>
+      </ul>
+      <button class="site-nav__toggle" aria-label="Menu öffnen" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- GRADIENT FADER UNDER NAV -->
+  <div class="nav-fader">
+    <img src="images/backgrounds/yy_gradient_fader_nav.png" alt="">
+  </div>
+
+  <!-- HERO -->
+  <div class="home-hero">
+    <div class="home-hero__bg">
+      <img src="images/backgrounds/yy_seoul_bg.png" alt="Seoul Skyline">
+    </div>
+    <img class="home-plane" src="images/backgrounds/yy_plane.png" alt="">
+
+    <div class="home-content">
+
+      <!-- OPENING HOURS -->
+      <section class="home-section">
+        <h2 class="home-section__title">Opening Hours</h2>
+        <table class="hours-table"><tbody id="hours-body"><tr><td>Mon – Thu</td>
+            <td>12:00 – 23:00</td>
+            <td>Kitchen till 22:00</td>
+          </tr>
+          <tr>
+            <td>Fri &amp; Sat</td>
+            <td>12:00 – 23:30</td>
+            <td>Kitchen till 22:30</td>
+          </tr>
+          <tr>
+            <td>Sun</td>
+            <td>13:00 – 22:30</td>
+            <td>Kitchen till 21:30</td></tr></tbody></table>
+      </section>
+
+      <div class="section-fader">
+        <img src="images/backgrounds/yy_gradient_fader.png" alt="">
+      </div>
+
+      <!-- LOCATION -->
+      <section class="home-section">
+        <h2 class="home-section__title">Location</h2>
+        <div class="location-inner">
+          <div>
+            <div class="location-address" id="location-address">
+              <strong>Yam Yam Berlin</strong>
+              Alte Schönhauser Straße 6<br>10119 Berlin
+            </div>
+            <a href="tel:+4930246324 85" class="location-phone" id="location-phone">+49 (0)30 24 63 24 85</a>
+            <a href="https://maps.google.com/?q=Alte+Schönhauser+Straße+6,+10119+Berlin" target="_blank" rel="noopener" class="btn-outline">
+              Map <span class="arrow">→</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-fader">
+        <img src="images/backgrounds/yy_gradient_fader.png" alt="">
+      </div>
+
+      <!-- MENUE -->
+      <section class="home-section">
+        <h2 class="home-section__title">Menue</h2>
+        <div class="menue-teaser">
+          <p id="menu-teaser-text">Lunch, Starters, Mains, Desserts &amp; Drinks</p>
+          <p>You'll find your choice</p>
+          <a href="menu.html" class="btn-outline" style="margin-top:24px">
+            Read Menue <span class="arrow">→</span>
+          </a>
+        </div>
+      </section>
+
+      <div class="section-fader">
+        <img src="images/backgrounds/yy_gradient_fader.png" alt="">
+      </div>
+
+      <!-- ABOUT -->
+      <section class="home-section">
+        <h2 class="home-section__title">About<br>YamYam Berlin</h2>
+        <div class="about-inner">
+          <p>We started in 2009 with a clear claim: authentic, well-made, no shortcuts.</p>
+          <p>We develop all our dishes in-house, ferment ourselves, and combine traditional Korean ingredients with modern flavours. International team, contemporary cuisine.</p>
+          <a href="about.html" class="btn-outline" style="display:inline-flex;margin-top:8px">
+            Read More <span class="arrow">→</span>
+          </a>
+        </div>
+      </section>
+
+    </div><!-- /home-content -->
+  </div><!-- /home-hero -->
+
+  <!-- JOBS -->
+  <section class="home-jobs">
+    <div class="home-jobs__bg">
+      <img src="images/backgrounds/yy_Folks_02.png" alt="">
+    </div>
+    <div class="home-jobs__content">
+      <div class="home-jobs__inner">
+        <h2 class="home-section__title">Jobs</h2>
+        <ul class="jobs-list" id="home-jobs-list">
+          <li><strong>Cook/Koch*In</strong><span>Fulltime 42hr/week</span></li>
+          <li><strong>Kitchen assistant /Küchenhilfe - Beikoch*In</strong><span>Fulltime 42hr/week</span></li>
+          <li><strong>Dishwasher/Spüler*In</strong><span>Fulltime 42hr/week</span></li>
+          <li><strong>Bartender</strong><span>Fulltime 42hr/week</span></li>
+          <li><strong>Shiftleader Service/Schichtleiter*In</strong><span>Fulltime 42hr/week</span></li>
+          <li><strong>Service/ Kellner*In</strong><span>Fulltime 42hr/week</span></li>
+          <li><strong>Facility Manager*In</strong><span>Minijob</span></li>
+          <li><strong>Office Manager/ Bürohilfe</strong><span>Parttime 12hrs/week or Minijob</span></li>
+        </ul>
+        <a href="jobs.html" class="btn-outline">
+          Read More <span class="arrow">→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="home-footer" role="contentinfo">
+    <div class="home-footer__inner">
+      <a href="index.html" class="home-footer__logo">
+        <img src="images/logos/YY_Logo_Red.svg" alt="YamYam Berlin">
+      </a>
+      <p class="home-footer__copy">© Copyright 2026 YamYam Berlin GmbH</p>
+      <a href="datenschutz.html" class="home-footer__link">Impressum &amp; Datenschutz</a>
+    </div>
+  </footer>
+
+  
+
+
+  <script src="config.js"></script>
+  <script src="sheets.js"></script>
+  <script>
+    // Load Home data from Sheet
+    async function renderHome() {
+      const data = await YYSheets.getHomeData();
+
+      // Opening Hours
+      const hoursEl = document.getElementById('hours-body');
+      if (hoursEl && data.hours.length) {
+        hoursEl.innerHTML = data.hours.map(h => `
+          <tr>
+            <td>${h.day}</td>
+            <td><strong>${h.time}</strong></td>
+            <td>${h.kitchen}</td>
+          </tr>`).join('');
+      }
+
+      // Location
+      const locEl = document.getElementById('location-address');
+      if (locEl && data.contact.name) {
+        locEl.innerHTML = `
+          <strong>${data.contact.name}</strong>
+          ${data.contact.street}<br>${data.contact.city}`;
+      }
+      const phoneEl = document.getElementById('location-phone');
+      if (phoneEl && data.contact.phone) {
+        const p = data.contact.phone.replace(/^0049/, '+49').replace(/^00/, '+');
+        phoneEl.textContent = p.replace(/(\+49)(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})/, '$1 ($2) $3 $4 $5 $6');
+        phoneEl.href = `tel:${p}`;
+      }
+
+      // Menu teaser
+      const menuEl = document.getElementById('menu-teaser-text');
+      if (menuEl && data.menuTeaser) menuEl.textContent = data.menuTeaser;
+
+      // Jobs list
+      const jobsEl = document.getElementById('home-jobs-list');
+      if (jobsEl && data.jobs.length) {
+        jobsEl.innerHTML = data.jobs.map(j => `
+          <li>
+            <strong>${j.title}</strong>
+            <span>${[j.employment, j.hours].filter(Boolean).join(' ')}</span>
+          </li>`).join('');
+      }
+    }
+
+    renderHome().catch(console.error);
+
+    // Plane scroll animation
+    const plane = document.querySelector('.home-plane');
+    const hero  = document.querySelector('.home-hero');
+
+    function updatePlane() {
+      if (!plane || !hero) return;
+      const heroH  = hero.offsetHeight;
+      const scrollY = window.scrollY;
+      const progress = Math.min(Math.max(scrollY / heroH, 0), 1);
+
+      // translateX from -10vw (hidden left) to 110vw (off right)
+      const x = -10 + progress * 120; // vw units
+      const opacity = progress < 0.02 ? 0 : progress > 0.95 ? 0 : 1;
+
+      plane.style.transform = `translateX(${x}vw)`;
+      plane.style.opacity   = opacity;
+    }
+
+    window.addEventListener('scroll', updatePlane, { passive: true });
+    updatePlane();
+
+    // Mobile nav toggle
+    document.querySelector('.site-nav__toggle').addEventListener('click', function() {
+      document.querySelector('.site-nav__links').classList.toggle('open');
+      this.setAttribute('aria-expanded', this.getAttribute('aria-expanded') === 'false' ? 'true' : 'false');
+    });
+  </script>
+</body>
+</html>

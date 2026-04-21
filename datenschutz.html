@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Impressum & Datenschutz — YamYam Berlin</title>
+  <link rel="stylesheet" href="global.css">
+  <style>
+    body { padding-top: var(--nav-height); }
+
+    .legal-page {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 64px var(--gap) 80px;
+    }
+    .legal-h1 {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: clamp(28px, 4vw, 48px);
+      letter-spacing: var(--tracking-display);
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 48px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--red);
+    }
+    .legal-h2 {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 20px;
+      letter-spacing: var(--tracking-display);
+      text-transform: uppercase;
+      color: var(--black);
+      margin-top: 40px;
+      margin-bottom: 12px;
+    }
+    .legal-h3 {
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: var(--fs-small);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--black);
+      margin-top: 24px;
+      margin-bottom: 8px;
+    }
+    .legal-strong {
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: var(--fs-body);
+      color: var(--black);
+      display: block;
+      margin-bottom: 4px;
+    }
+    .legal-p {
+      font-family: var(--font-body);
+      font-size: var(--fs-body);
+      line-height: 1.8;
+      color: var(--gray-text);
+      margin-bottom: 12px;
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="site-nav" role="navigation">
+    <div class="site-nav__inner">
+      <ul class="site-nav__links site-nav__links--left" role="list">
+        <li><a href="menu.html">Menue</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="jobs.html">Jobs</a></li>
+      </ul>
+      <a href="index.html" class="site-nav__logo">
+        <img src="images/logos/YY_Logo_Red.svg" alt="YamYam Berlin">
+      </a>
+      <ul class="site-nav__links site-nav__links--right" role="list">
+        <li><a href="https://app.resmio.com/yamyam-berlin/widget" target="_blank" rel="noopener">Reserve</a></li>
+        <li><a href="https://wolt.com/en/deu/berlin/restaurant/yamyam" target="_blank" rel="noopener">Order Online</a></li>
+        <li>
+          <a href="https://www.instagram.com/yamyamberlin" target="_blank" rel="noopener" class="site-nav__ig">
+            <img src="images/icons/ig_icon.svg" alt="Instagram" width="28" height="28">
+          </a>
+        </li>
+      </ul>
+      <button class="site-nav__toggle" aria-label="Menu öffnen" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <main class="legal-page" role="main" id="legal-root">
+    <div style="padding:48px 0;color:var(--red);font-family:var(--font-display);letter-spacing:var(--tracking-display);text-transform:uppercase">Loading…</div>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="site-footer__inner">
+      <p class="site-footer__copy">© Copyright 2026 YamYam Berlin GmbH</p>
+      <nav class="site-footer__links">
+        <a href="datenschutz.html">Impressum &amp; Datenschutz</a>
+        <a href="mailto:contact@yamyam-berlin.de">contact@yamyam-berlin.de</a>
+        <a href="https://www.instagram.com/yamyamberlin" target="_blank" rel="noopener">
+          <img src="images/icons/ig_icon.svg" alt="Instagram" width="16" height="16" style="vertical-align:middle">
+        </a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="config.js"></script>
+  <script src="sheets.js"></script>
+  <script>
+    document.querySelector('.site-nav__toggle').addEventListener('click', function() {
+      document.querySelector('.site-nav__links').classList.toggle('open');
+    });
+
+    async function renderDatenschutz() {
+      const rows = await YYSheets.getDatenschutzData();
+      const root = document.getElementById('legal-root');
+      let html = '';
+      let currentH1 = '';
+
+      for (const row of rows) {
+        if (row.h1 && row.h1 !== currentH1) {
+          currentH1 = row.h1;
+          // First H1 is the page title
+          if (!html) {
+            html += `<h1 class="legal-h1">${row.h1}</h1>`;
+          } else {
+            html += `<h2 class="legal-h2">${row.h1}</h2>`;
+          }
+        }
+        if (row.h2) html += `<h3 class="legal-h3">${row.h2}</h3>`;
+        if (row.strong) html += `<span class="legal-strong">${row.strong}</span>`;
+        if (row.p) html += `<p class="legal-p">${row.p.replace(/\n/g, '<br>')}</p>`;
+      }
+
+      root.innerHTML = html;
+    }
+
+    renderDatenschutz().catch(err => {
+      document.getElementById('legal-root').innerHTML = '<p style="padding:48px">Inhalte konnten nicht geladen werden.</p>';
+      console.error(err);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jobs — YamYam Berlin · Home of Korean Food</title>
+  <link rel="stylesheet" href="global.css">
+  <style>
+    body { padding-top: var(--nav-height); }
+
+    .jobs-hero {
+      position: relative;
+      overflow: hidden;
+      background: var(--bg);
+      padding: 80px var(--gap) 64px;
+      min-height: 40vh;
+      display: flex; align-items: flex-end;
+    }
+    .jobs-hero__bg { position: absolute; inset: 0; pointer-events: none; }
+    .jobs-hero__bg img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center;
+      opacity: 0.25;
+    }
+    .jobs-hero__title {
+      position: relative; z-index: 1;
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: clamp(36px, 6vw, 80px);
+      letter-spacing: var(--tracking-display);
+      text-transform: uppercase;
+      color: var(--red); line-height: 1;
+    }
+
+    .btn-outline {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--font-accent);
+      font-style: italic; font-weight: 700; font-size: 16px;
+      color: var(--red); border: 1.5px solid var(--red);
+      padding: 8px 20px; margin-top: 20px;
+      transition: background 0.15s, color 0.15s;
+    }
+    .btn-outline:hover { background: var(--red); color: var(--white); }
+
+    /* Apply button top */
+    .jobs-apply-bar {
+      padding: 24px var(--gap);
+      max-width: 1200px; margin: 0 auto;
+    }
+
+    /* Job listings */
+    .jobs-list-section {
+      max-width: 1200px; margin: 0 auto;
+      padding: 0 var(--gap) 80px;
+    }
+    .job-entry {
+      border-top: 1px solid var(--gray-light);
+      padding: 40px 0;
+    }
+    .job-entry__header {
+      display: flex; justify-content: space-between;
+      align-items: baseline; gap: 24px;
+      margin-bottom: 16px; flex-wrap: wrap;
+    }
+    .job-entry__title {
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: clamp(16px, 2vw, 20px);
+      color: var(--black);
+    }
+    .job-entry__employment {
+      font-family: var(--font-body);
+      font-size: var(--fs-body);
+      color: var(--gray-text);
+      white-space: nowrap;
+    }
+    .job-entry__desc {
+      font-family: var(--font-body);
+      font-size: var(--fs-body);
+      line-height: 1.8;
+      color: var(--black);
+      max-width: 720px;
+    }
+    .jobs-list-section .btn-outline { margin-top: 48px; }
+
+    #jobs-loading {
+      padding: 80px var(--gap);
+      font-family: var(--font-display);
+      font-size: 20px;
+      color: var(--red);
+      letter-spacing: var(--tracking-display);
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="site-nav" role="navigation">
+    <div class="site-nav__inner">
+      <ul class="site-nav__links site-nav__links--left" role="list">
+        <li><a href="menu.html">Menue</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="jobs.html" class="active">Jobs</a></li>
+      </ul>
+      <a href="index.html" class="site-nav__logo">
+        <img src="images/logos/YY_Logo_Red.svg" alt="YamYam Berlin">
+      </a>
+      <ul class="site-nav__links site-nav__links--right" role="list">
+        <li><a href="https://app.resmio.com/yamyam-berlin/widget" target="_blank" rel="noopener">Reserve</a></li>
+        <li><a href="https://wolt.com/en/deu/berlin/restaurant/yamyam" target="_blank" rel="noopener">Order Online</a></li>
+        <li>
+          <a href="https://www.instagram.com/yamyamberlin" target="_blank" rel="noopener" class="site-nav__ig">
+            <img src="images/icons/ig_icon.svg" alt="Instagram" width="28" height="28">
+          </a>
+        </li>
+      </ul>
+      <button class="site-nav__toggle" aria-label="Menu öffnen" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="jobs-hero">
+    <div class="jobs-hero__bg">
+      <img src="images/backgrounds/yy_Folks_02.png" alt="">
+    </div>
+    <h1 class="jobs-hero__title">Jobs</h1>
+  </section>
+
+  <!-- Apply button -->
+  <div class="jobs-apply-bar">
+    <a href="mailto:jobs@yamyam-berlin.de" class="btn-outline">Apply →</a>
+  </div>
+
+  <!-- Job listings -->
+  <div id="jobs-loading" style="padding:48px var(--gap)">Loading…</div>
+  <div class="jobs-list-section" id="jobs-root"></div>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="site-footer__inner">
+      <p class="site-footer__copy">© Copyright 2026 YamYam Berlin GmbH</p>
+      <nav class="site-footer__links">
+        <a href="datenschutz.html">Impressum &amp; Datenschutz</a>
+        <a href="mailto:contact@yamyam-berlin.de">contact@yamyam-berlin.de</a>
+        <a href="https://www.instagram.com/yamyamberlin" target="_blank" rel="noopener">
+          <img src="images/icons/ig_icon.svg" alt="Instagram" width="16" height="16" style="vertical-align:middle">
+        </a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="config.js"></script>
+  <script src="sheets.js"></script>
+  <script>
+    document.querySelector('.site-nav__toggle').addEventListener('click', function() {
+      document.querySelector('.site-nav__links').classList.toggle('open');
+    });
+
+    async function renderJobs() {
+      const jobs = await YYSheets.getJobsData();
+      const root = document.getElementById('jobs-root');
+      document.getElementById('jobs-loading').remove();
+
+      root.innerHTML = jobs.map(job => `
+        <div class="job-entry">
+          <div class="job-entry__header">
+            <span class="job-entry__title">${job.title}</span>
+            <span class="job-entry__employment">${job.employment}</span>
+          </div>
+          <p class="job-entry__desc">${job.description}</p>
+        </div>
+      `).join('');
+
+      root.innerHTML += `<a href="mailto:jobs@yamyam-berlin.de" class="btn-outline">Apply →</a>`;
+    }
+
+    renderJobs().catch(err => {
+      document.getElementById('jobs-loading').textContent = 'Inhalte konnten nicht geladen werden.';
+      console.error(err);
+    });
+  </script>
+</body>
+</html>
