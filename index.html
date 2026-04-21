@@ -4,7 +4,25 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>YamYam Berlin · Home of Korean Food</title>
-  <meta name="description" content="YamYam Berlin — Authentic Korean food in the heart of Berlin since 2009.">
+  <!-- SEO -->
+  <meta name="description" content="Authentische koreanische Küche im Herzen Berlins seit 2009. Täglich frisch, in-house entwickelt. Alte Schönhauser Straße 6, Berlin Mitte.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://yamyam-berlin.de/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="YamYam Berlin · Home of Korean Food">
+  <meta property="og:description" content="Authentische koreanische Küche im Herzen Berlins seit 2009. Täglich frisch, in-house entwickelt. Alte Schönhauser Straße 6, Berlin Mitte.">
+  <meta property="og:url" content="https://yamyam-berlin.de/">
+  <meta property="og:image" content="https://yamyam-berlin.de/images/backgrounds/yy_seoul_bg.png">
+  <meta property="og:locale" content="de_DE">
+  <meta property="og:site_name" content="YamYam Berlin">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="YamYam Berlin · Home of Korean Food">
+  <meta name="twitter:description" content="Authentische koreanische Küche im Herzen Berlins seit 2009. Täglich frisch, in-house entwickelt. Alte Schönhauser Straße 6, Berlin Mitte.">
+  <meta name="twitter:image" content="https://yamyam-berlin.de/images/backgrounds/yy_seoul_bg.png">
   <link rel="stylesheet" href="global.css">
   <style>
     /* ── Page base ── */
@@ -29,29 +47,19 @@
       object-position: center top;
     }
 
-    /* ── Gradient fader under nav ── */
-    .nav-fader {
-      position: sticky;
-      top: var(--nav-height);
-      left: 0; right: 0;
-      height: 60px;
-      z-index: 90;
-      pointer-events: none;
-      margin-bottom: -60px;
-    }
-    .nav-fader img { width: 100%; height: 100%; object-fit: fill; }
+    
 
     /* ── Plane animation ── */
     .home-plane {
       position: fixed;
-      top: 18vh;
       left: 0;
+      top: calc(var(--nav-height) + 60px);
       z-index: 5;
-      width: 80px;
-      height: 24px;
+      width: 40px;
+      height: 12px;
       pointer-events: none;
-      transform: translateX(-20vw);
       opacity: 0;
+      will-change: transform, top, opacity;
     }
 
     /* ── Content sits on top of BG ── */
@@ -64,18 +72,38 @@
     /* ── Section base ── */
     .home-section {
       position: relative;
-      padding: 80px var(--gap);
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    /* ── Gradient fader between sections ── */
-    .section-fader {
       width: 100%;
-      height: 80px;
-      pointer-events: none;
     }
-    .section-fader img { width: 100%; height: 100%; object-fit: fill; }
+    .home-section__inner {
+      max-width: var(--page-width);
+      margin: 0 auto;
+      padding: 80px var(--gap);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+    }
+    /* Left-aligned: content in left column */
+    .home-section__inner .home-section__content { grid-column: 1; }
+    /* Right-aligned: content in right column */
+    .home-section--right .home-section__inner .home-section__content { grid-column: 2; }
+    .home-section--right .home-section__inner .home-section__content { text-align: left; }
+    /* Right-aligned sections (Opening Hours, Menue) */
+    .home-section--right {
+      text-align: right;
+    }
+    .home-section--right .hours-table {
+      margin-left: auto;
+    }
+    .home-section--right .hours-table td {
+      text-align: left; /* keep table cells left-aligned for readability */
+    }
+    .home-section--right .menue-teaser p {
+      text-align: right;
+    }
+    .home-section--right .btn-outline {
+      margin-left: auto;
+      display: inline-flex;
+    }
 
     /* ── Section headings ── */
     .home-section__title {
@@ -132,8 +160,9 @@
       font-size: 16px;
       color: var(--red);
       border: 1.5px solid var(--red);
+      border-radius: 8px;
       padding: 8px 20px;
-      border-radius: 2px;
+      border-radius: 8px;
       transition: background 0.15s, color 0.15s;
     }
     .btn-outline:hover { background: var(--red); color: var(--white); }
@@ -163,7 +192,7 @@
       position: relative;
       overflow: hidden;
       background: var(--bg);
-      padding: 80px var(--gap);
+      padding: 80px 0;
     }
     .home-jobs__bg {
       position: absolute;
@@ -181,8 +210,9 @@
     .home-jobs__content {
       position: relative;
       z-index: 1;
-      max-width: 1200px;
+      max-width: var(--page-width);
       margin: 0 auto;
+      padding: 0 var(--gap);
       display: flex;
       justify-content: flex-end;
     }
@@ -209,30 +239,12 @@
     }
 
     /* ── Footer ── */
-    .home-footer {
-      background: var(--bg);
-      border-top: 1px solid var(--red);
-      padding: 24px var(--gap);
-    }
-    .home-footer__inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 16px;
-    }
-    .home-footer__logo img { height: 32px; }
-    .home-footer__copy { font-size: 11px; color: var(--black); }
-    .home-footer__link {
-      font-size: 11px;
-      color: var(--red);
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      transition: color 0.15s;
-    }
-    .home-footer__link:hover { color: var(--black); }
+    
+    
+    
+    
+    
+    
 
     /* ── Responsive ── */
     @media (max-width: 900px) {
@@ -241,29 +253,96 @@
       .home-jobs__content { grid-template-columns: 1fr; }
       .home-plane {
       position: fixed;
-      top: 18vh;
       left: 0;
+      top: calc(var(--nav-height) + 60px);
       z-index: 5;
-      width: 80px;
-      height: 24px;
+      width: 40px;
+      height: 12px;
       pointer-events: none;
-      transform: translateX(-20vw);
       opacity: 0;
+      will-change: transform, top, opacity;
     }
     }
     @media (max-width: 600px) {
-      .home-section { padding: 48px var(--gap); }
+      .home-section {
+      position: relative;
+      width: 100%;
+    }
+    .home-section__inner {
+      max-width: var(--page-width);
+      margin: 0 auto;
+      padding: 80px var(--gap);
+    }
+    .home-section--right .home-section__inner { text-align: right; }
+    .home-section--right .hours-table { margin-left: auto; }
+    .home-section--right .btn-outline { margin-left: auto; display: inline-flex; }
       .hours-table td { font-size: var(--fs-body); padding-right: 12px; }
     }
   </style>
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Restaurant",
+    "name": "YamYam Berlin",
+    "alternateName": "Yam Yam Berlin",
+    "description": "Authentische koreanische Küche im Herzen Berlins seit 2009. In-house entwickelt, international team, zeitgenössische Küche.",
+    "url": "https://yamyam-berlin.de",
+    "telephone": "+49-30-24632485",
+    "email": "contact@yamyam-berlin.de",
+    "foundingDate": "2009",
+    "servesCuisine": ["Korean", "Korean BBQ", "Asian"],
+    "priceRange": "€€",
+    "currenciesAccepted": "EUR",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Alte Schönhauser Straße 6",
+      "addressLocality": "Berlin",
+      "postalCode": "10119",
+      "addressCountry": "DE",
+      "addressRegion": "Berlin-Mitte"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 52.5243,
+      "longitude": 13.4059
+    },
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday"],
+        "opens": "12:00",
+        "closes": "23:00"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Friday","Saturday"],
+        "opens": "12:00",
+        "closes": "23:30"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Sunday"],
+        "opens": "13:00",
+        "closes": "22:30"
+      }
+    ],
+    "sameAs": [
+      "https://www.instagram.com/yamyamberlin"
+    ],
+    "image": "https://yamyam-berlin.de/images/backgrounds/yy_seoul_bg.png",
+    "logo": "https://yamyam-berlin.de/images/logos/YY_Logo_Red.svg",
+    "hasMap": "https://maps.google.com/?q=Alte+Schönhauser+Straße+6,+10119+Berlin"
+  }
+  </script>
 </head>
 <body style="padding-top: 0">
 
   <!-- NAV -->
-  <nav class="site-nav" role="navigation" aria-label="Main navigation">
+      <nav class="site-nav" role="navigation" aria-label="Main navigation">
     <div class="site-nav__inner">
       <ul class="site-nav__links site-nav__links--left" role="list">
-        <li><a href="menu.html">Menue</a></li>
+        <li><a href="menue.html">Menue</a></li>
         <li><a href="about.html">About</a></li>
         <li><a href="jobs.html">Jobs</a></li>
       </ul>
@@ -279,16 +358,14 @@
           </a>
         </li>
       </ul>
-      <button class="site-nav__toggle" aria-label="Menu öffnen" aria-expanded="false">
-        <span></span><span></span><span></span>
+      <button class="site-nav__burger" aria-label="Menu öffnen" aria-expanded="false">
+        <img src="images/icons/burger.png" alt="">
       </button>
     </div>
   </nav>
 
   <!-- GRADIENT FADER UNDER NAV -->
-  <div class="nav-fader">
-    <img src="images/backgrounds/yy_gradient_fader_nav.png" alt="">
-  </div>
+  
 
   <!-- HERO -->
   <div class="home-hero">
@@ -300,73 +377,61 @@
     <div class="home-content">
 
       <!-- OPENING HOURS -->
-      <section class="home-section">
-        <h2 class="home-section__title">Opening Hours</h2>
-        <table class="hours-table"><tbody id="hours-body"><tr><td>Mon – Thu</td>
-            <td>12:00 – 23:00</td>
-            <td>Kitchen till 22:00</td>
-          </tr>
-          <tr>
-            <td>Fri &amp; Sat</td>
-            <td>12:00 – 23:30</td>
-            <td>Kitchen till 22:30</td>
-          </tr>
-          <tr>
-            <td>Sun</td>
-            <td>13:00 – 22:30</td>
-            <td>Kitchen till 21:30</td></tr></tbody></table>
+      <section class="home-section home-section--right">
+        <div class="home-section__inner">
+          <div class="home-section__content">
+            <h2 class="home-section__title">Opening Hours</h2>
+            <table class="hours-table"><tbody id="hours-body">
+              <tr><td>Mon – Thu</td><td><strong>12:00 – 23:00</strong></td><td>Kitchen till 22:00</td></tr>
+              <tr><td>Fri &amp; Sat</td><td><strong>12:00 – 23:30</strong></td><td>Kitchen till 22:30</td></tr>
+              <tr><td>Sun</td><td><strong>13:00 – 22:30</strong></td><td>Kitchen till 21:30</td></tr>
+            </tbody></table>
+          </div>
+        </div>
       </section>
-
-      <div class="section-fader">
-        <img src="images/backgrounds/yy_gradient_fader.png" alt="">
-      </div>
 
       <!-- LOCATION -->
       <section class="home-section">
-        <h2 class="home-section__title">Location</h2>
-        <div class="location-inner">
-          <div>
+        <div class="home-section__inner">
+          <div class="home-section__content">
+            <h2 class="home-section__title">Location</h2>
             <div class="location-address" id="location-address">
-              <strong>Yam Yam Berlin</strong>
+              <strong>YAM YAM BERLIN</strong><br>
               Alte Schönhauser Straße 6<br>10119 Berlin
             </div>
             <a href="tel:+4930246324 85" class="location-phone" id="location-phone">+49 (0)30 24 63 24 85</a>
-            <a href="https://maps.google.com/?q=Alte+Schönhauser+Straße+6,+10119+Berlin" target="_blank" rel="noopener" class="btn-outline">
-              Map <span class="arrow">→</span>
+            <a href="https://maps.google.com/?q=Alte+Schönhauser+Straße+6,+10119+Berlin" target="_blank" rel="noopener" class="btn-outline" style="margin-top:20px">
+              Map <img src="images/icons/arrow.svg" alt="" class="btn-arrow" width="16" height="16">
             </a>
           </div>
         </div>
       </section>
 
-      <div class="section-fader">
-        <img src="images/backgrounds/yy_gradient_fader.png" alt="">
-      </div>
-
       <!-- MENUE -->
-      <section class="home-section">
-        <h2 class="home-section__title">Menue</h2>
-        <div class="menue-teaser">
-          <p id="menu-teaser-text">Lunch, Starters, Mains, Desserts &amp; Drinks</p>
-          <p>You'll find your choice</p>
-          <a href="menu.html" class="btn-outline" style="margin-top:24px">
-            Read Menue <span class="arrow">→</span>
-          </a>
+      <section class="home-section home-section--right">
+        <div class="home-section__inner">
+          <div class="home-section__content">
+            <h2 class="home-section__title">Menue</h2>
+            <p id="menu-teaser-text">Lunch, Starters, Mains, Desserts &amp; Drinks</p>
+            <p>You'll find your choice</p>
+            <a href="menue.html" class="btn-outline" style="margin-top:20px">
+              Read Menue <img src="images/icons/arrow.svg" alt="" class="btn-arrow" width="16" height="16">
+            </a>
+          </div>
         </div>
       </section>
 
-      <div class="section-fader">
-        <img src="images/backgrounds/yy_gradient_fader.png" alt="">
-      </div>
-
       <!-- ABOUT -->
       <section class="home-section">
-        <h2 class="home-section__title">About<br>YamYam Berlin</h2>
-        <div class="about-inner">
-          <p>We started in 2009 with a clear claim: authentic, well-made, no shortcuts.</p>
-          <p>We develop all our dishes in-house, ferment ourselves, and combine traditional Korean ingredients with modern flavours. International team, contemporary cuisine.</p>
-          <a href="about.html" class="btn-outline" style="display:inline-flex;margin-top:8px">
-            Read More <span class="arrow">→</span>
-          </a>
+        <div class="home-section__inner">
+          <div class="home-section__content">
+            <h2 class="home-section__title">About<br>YamYam Berlin</h2>
+            <p>We started in 2009 with a clear claim: authentic, well-made, no shortcuts.</p>
+            <p>We develop all our dishes in-house, ferment ourselves, and combine traditional Korean ingredients with modern flavours. International team, contemporary cuisine.</p>
+            <a href="about.html" class="btn-outline" style="margin-top:20px">
+              Read More <img src="images/icons/arrow.svg" alt="" class="btn-arrow" width="16" height="16">
+            </a>
+          </div>
         </div>
       </section>
 
@@ -392,20 +457,21 @@
           <li><strong>Office Manager/ Bürohilfe</strong><span>Parttime 12hrs/week or Minijob</span></li>
         </ul>
         <a href="jobs.html" class="btn-outline">
-          Read More <span class="arrow">→</span>
+          Read More <img src="images/icons/arrow.svg" alt="" class="btn-arrow" width="16" height="16">
         </a>
       </div>
     </div>
   </section>
 
   <!-- FOOTER -->
-  <footer class="home-footer" role="contentinfo">
-    <div class="home-footer__inner">
-      <a href="index.html" class="home-footer__logo">
-        <img src="images/logos/YY_Logo_Red.svg" alt="YamYam Berlin">
+    <footer class="site-footer" role="contentinfo">
+    <div class="site-footer__inner">
+      <a href="index.html" class="site-footer__logo">
+        <img src="images/logos/YY_Logo_Red.svg" alt="YamYam Berlin" height="32">
       </a>
-      <p class="home-footer__copy">© Copyright 2026 YamYam Berlin GmbH</p>
-      <a href="datenschutz.html" class="home-footer__link">Impressum &amp; Datenschutz</a>
+      <p class="site-footer__copy">© Copyright 2026 YamYam Berlin GmbH</p>
+      <span></span>
+      <a href="datenschutz.html" class="site-footer__legal">Impressum &amp; Datenschutz</a>
     </div>
   </footer>
 
@@ -461,25 +527,40 @@
 
     renderHome().catch(console.error);
 
-    // Plane scroll animation
-    const plane = document.querySelector('.home-plane');
-    const hero  = document.querySelector('.home-hero');
+    // Plane scroll animation — parallax
+    const plane    = document.querySelector('.home-plane');
+    const hero     = document.querySelector('.home-hero');
+    const menuLink = document.querySelector('.site-nav__links--left a:first-child');
+    const PARALLAX = 0.07; // tune: lower = less movement upward
+
+    const navH     = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-height')) || 100;
+    const startTop = navH + 60;
 
     function updatePlane() {
       if (!plane || !hero) return;
-      const heroH  = hero.offsetHeight;
-      const scrollY = window.scrollY;
+      const heroH    = hero.offsetHeight;
+      const scrollY  = window.scrollY;
       const progress = Math.min(Math.max(scrollY / heroH, 0), 1);
 
-      // translateX from -10vw (hidden left) to 110vw (off right)
-      const x = -10 + progress * 120; // vw units
-      const opacity = progress < 0.02 ? 0 : progress > 0.95 ? 0 : 1;
+      // X: starts under MENUE link, flies to right
+      const rect     = menuLink ? menuLink.getBoundingClientRect() : null;
+      const startXPx = rect ? rect.left : 40;
+      const startXVw = (startXPx / window.innerWidth) * 100;
+      const xVw      = startXVw + (progress * (110 - startXVw));
 
-      plane.style.transform = `translateX(${x}vw)`;
+      // Y: parallax upward — no fade, just moves
+      const topPx = startTop - (scrollY * PARALLAX);
+
+      // No fade in — visible immediately, fades out at end only
+      const opacity = progress > 0.92 ? (1 - progress) / 0.08 : 1;
+
+      plane.style.transform = `translateX(${xVw}vw)`;
+      plane.style.top       = `${topPx}px`;
       plane.style.opacity   = opacity;
     }
 
     window.addEventListener('scroll', updatePlane, { passive: true });
+    window.addEventListener('resize', updatePlane);
     updatePlane();
 
     // Mobile nav toggle

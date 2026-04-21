@@ -7,18 +7,19 @@
 .menu-nav {
   position: sticky;
   top: var(--nav-height);
-  z-index: 90;
-  background: var(--white);
+  z-index: 50;
+  background: var(--bg);
   border-bottom: 1px solid var(--gray-light);
+  padding: 12px 0;
 }
 .menu-nav__inner {
-  max-width: var(--max-width);
+  max-width: var(--page-width);
   margin: 0 auto;
   padding: 0 var(--gap);
   display: flex;
-  gap: 0;
+  gap: 24px;
+  align-items: center;
   overflow-x: auto;
-  scrollbar-width: none;
 }
 .menu-nav__inner::-webkit-scrollbar { display: none; }
 
@@ -42,10 +43,10 @@
 
 /* --- Page wrapper ------------------------------------------ */
 .menu-page {
-  padding-top: 0;
-  max-width: var(--max-width);
+  max-width: var(--page-width);
   margin: 0 auto;
-  padding: 48px var(--gap) 0;
+  padding: 0 var(--gap);
+  padding-top: 24px;
 }
 
 /* --- Loading state ----------------------------------------- */

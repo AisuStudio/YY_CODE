@@ -1,0 +1,35 @@
+# YamYam Berlin
+
+> Authentic Korean restaurant in the heart of Berlin since 2009.
+> In-house developed dishes, international team, contemporary Korean cuisine.
+
+## About
+YamYam Berlin was founded in 2009 with a clear claim: authentic, well-made, no shortcuts.
+We develop all dishes in-house, ferment ourselves, and combine traditional Korean ingredients with modern flavours.
+The team consists of about 40 people from diverse backgrounds.
+
+## Location
+- Address: Alte Schönhauser Straße 6, 10119 Berlin-Mitte, Germany
+- Phone: +49 (0)30 24 63 24 85
+- Email: contact@yamyam-berlin.de
+- Instagram: @yamyamberlin
+
+## Opening Hours
+- Monday–Thursday: 12:00–23:00 (Kitchen till 22:00)
+- Friday–Saturday: 12:00–23:30 (Kitchen till 22:30)
+- Sunday: 13:00–22:30 (Kitchen till 21:30)
+
+## Menu
+Korean food including: Lunch specials, Starters, Mains, Desserts and Drinks.
+Categories: Lunch & Dailies, Soups & Starters, Mains, Desserts, Beverages.
+
+## Reservations
+Online reservations: https://app.resmio.com/yamyam-berlin/widget
+Order online (delivery): https://wolt.com/en/deu/berlin/restaurant/yamyam
+
+## Pages
+- /index.html — Homepage with opening hours, location, menu teaser, about and jobs
+- /menue.html — Full menu with all dishes and drinks
+- /about.html — About YamYam Berlin, the team and impressions
+- /jobs.html — Open positions and job descriptions
+- /datenschutz.html — Impressum and privacy policy (German)

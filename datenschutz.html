@@ -4,12 +4,31 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Impressum & Datenschutz — YamYam Berlin</title>
+  <!-- SEO -->
+  <meta name="description" content="Impressum und Datenschutzerklärung der YamYam Berlin GmbH, Alte Schönhauser Straße 6, 10119 Berlin.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://yamyam-berlin.de/datenschutz.html">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Impressum & Datenschutz — YamYam Berlin">
+  <meta property="og:description" content="Impressum und Datenschutzerklärung der YamYam Berlin GmbH, Alte Schönhauser Straße 6, 10119 Berlin.">
+  <meta property="og:url" content="https://yamyam-berlin.de/datenschutz.html">
+  <meta property="og:image" content="https://yamyam-berlin.de/images/backgrounds/yy_seoul_bg.png">
+  <meta property="og:locale" content="de_DE">
+  <meta property="og:site_name" content="YamYam Berlin">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Impressum & Datenschutz — YamYam Berlin">
+  <meta name="twitter:description" content="Impressum und Datenschutzerklärung der YamYam Berlin GmbH, Alte Schönhauser Straße 6, 10119 Berlin.">
+  <meta name="twitter:image" content="https://yamyam-berlin.de/images/backgrounds/yy_seoul_bg.png">
   <link rel="stylesheet" href="global.css">
   <style>
     body { padding-top: var(--nav-height); }
 
     .legal-page {
-      max-width: 800px;
+      max-width: var(--page-width);
       margin: 0 auto;
       padding: 64px var(--gap) 80px;
     }
@@ -63,27 +82,27 @@
 </head>
 <body>
 
-  <nav class="site-nav" role="navigation">
+      <nav class="site-nav" role="navigation" aria-label="Main navigation">
     <div class="site-nav__inner">
       <ul class="site-nav__links site-nav__links--left" role="list">
-        <li><a href="menu.html">Menue</a></li>
+        <li><a href="menue.html">Menue</a></li>
         <li><a href="about.html">About</a></li>
         <li><a href="jobs.html">Jobs</a></li>
       </ul>
-      <a href="index.html" class="site-nav__logo">
+      <a href="index.html" class="site-nav__logo" aria-label="YamYam Berlin Home">
         <img src="images/logos/YY_Logo_Red.svg" alt="YamYam Berlin">
       </a>
       <ul class="site-nav__links site-nav__links--right" role="list">
         <li><a href="https://app.resmio.com/yamyam-berlin/widget" target="_blank" rel="noopener">Reserve</a></li>
         <li><a href="https://wolt.com/en/deu/berlin/restaurant/yamyam" target="_blank" rel="noopener">Order Online</a></li>
         <li>
-          <a href="https://www.instagram.com/yamyamberlin" target="_blank" rel="noopener" class="site-nav__ig">
+          <a href="https://www.instagram.com/yamyamberlin" target="_blank" rel="noopener" class="site-nav__ig" aria-label="Instagram">
             <img src="images/icons/ig_icon.svg" alt="Instagram" width="28" height="28">
           </a>
         </li>
       </ul>
-      <button class="site-nav__toggle" aria-label="Menu öffnen" aria-expanded="false">
-        <span></span><span></span><span></span>
+      <button class="site-nav__burger" aria-label="Menu öffnen" aria-expanded="false">
+        <img src="images/icons/burger.png" alt="">
       </button>
     </div>
   </nav>
@@ -92,50 +111,52 @@
     <div style="padding:48px 0;color:var(--red);font-family:var(--font-display);letter-spacing:var(--tracking-display);text-transform:uppercase">Loading…</div>
   </main>
 
-  <footer class="site-footer" role="contentinfo">
+      <footer class="site-footer" role="contentinfo">
     <div class="site-footer__inner">
+      <a href="index.html" class="site-footer__logo">
+        <img src="images/logos/YY_Logo_Red.svg" alt="YamYam Berlin" height="32">
+      </a>
       <p class="site-footer__copy">© Copyright 2026 YamYam Berlin GmbH</p>
-      <nav class="site-footer__links">
-        <a href="datenschutz.html">Impressum &amp; Datenschutz</a>
-        <a href="mailto:contact@yamyam-berlin.de">contact@yamyam-berlin.de</a>
-        <a href="https://www.instagram.com/yamyamberlin" target="_blank" rel="noopener">
-          <img src="images/icons/ig_icon.svg" alt="Instagram" width="16" height="16" style="vertical-align:middle">
-        </a>
-      </nav>
+      <span></span>
+      <a href="datenschutz.html" class="site-footer__legal">Impressum &amp; Datenschutz</a>
     </div>
   </footer>
 
   <script src="config.js"></script>
   <script src="sheets.js"></script>
-  <script>
-    document.querySelector('.site-nav__toggle').addEventListener('click', function() {
-      document.querySelector('.site-nav__links').classList.toggle('open');
-    });
+        <script>
+    // Mobile burger nav
+    const burger = document.querySelector('.site-nav__burger');
+    const navLeft  = document.querySelector('.site-nav__links--left');
+    const navRight = document.querySelector('.site-nav__links--right');
+    if (burger) {
+      burger.addEventListener('click', function() {
+        const open = navLeft.classList.toggle('open');
+        navRight.classList.toggle('open');
+        this.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+    }
+  </script>
 
+  <script>
     async function renderDatenschutz() {
       const rows = await YYSheets.getDatenschutzData();
       const root = document.getElementById('legal-root');
       let html = '';
-      let currentH1 = '';
-
+      let firstH1 = true;
       for (const row of rows) {
-        if (row.h1 && row.h1 !== currentH1) {
-          currentH1 = row.h1;
-          // First H1 is the page title
-          if (!html) {
-            html += `<h1 class="legal-h1">${row.h1}</h1>`;
-          } else {
-            html += `<h2 class="legal-h2">${row.h1}</h2>`;
-          }
+        if (row.h1) {
+          html += firstH1
+            ? `<h1 class="legal-h1">${row.h1}</h1>`
+            : `<h2 class="legal-h2">${row.h1}</h2>`;
+          firstH1 = false;
         }
         if (row.h2) html += `<h3 class="legal-h3">${row.h2}</h3>`;
         if (row.strong) html += `<span class="legal-strong">${row.strong}</span>`;
         if (row.p) html += `<p class="legal-p">${row.p.replace(/\n/g, '<br>')}</p>`;
       }
-
       root.innerHTML = html;
     }
-
     renderDatenschutz().catch(err => {
       document.getElementById('legal-root').innerHTML = '<p style="padding:48px">Inhalte konnten nicht geladen werden.</p>';
       console.error(err);

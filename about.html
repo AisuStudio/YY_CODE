@@ -4,6 +4,25 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About — YamYam Berlin · Home of Korean Food</title>
+  <!-- SEO -->
+  <meta name="description" content="YamYam Berlin seit 2009 — authentisch, handgemacht, keine Shortcuts. Internationales Team, zeitgenössische koreanische Küche.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://yamyam-berlin.de/about.html">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="About — YamYam Berlin · Über 15 Jahre Korean Food">
+  <meta property="og:description" content="YamYam Berlin seit 2009 — authentisch, handgemacht, keine Shortcuts. Internationales Team, zeitgenössische koreanische Küche.">
+  <meta property="og:url" content="https://yamyam-berlin.de/about.html">
+  <meta property="og:image" content="https://yamyam-berlin.de/images/backgrounds/yy_about_venue.jpg">
+  <meta property="og:locale" content="de_DE">
+  <meta property="og:site_name" content="YamYam Berlin">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="About — YamYam Berlin · Über 15 Jahre Korean Food">
+  <meta name="twitter:description" content="YamYam Berlin seit 2009 — authentisch, handgemacht, keine Shortcuts. Internationales Team, zeitgenössische koreanische Küche.">
+  <meta name="twitter:image" content="https://yamyam-berlin.de/images/backgrounds/yy_about_venue.jpg">
   <link rel="stylesheet" href="global.css">
   <style>
     body { padding-top: var(--nav-height); }
@@ -24,7 +43,8 @@
     }
     .about-hero__title {
       position: absolute;
-      bottom: 48px; left: var(--gap);
+      bottom: 48px;
+      left: calc((100% - var(--page-width)) / 2 + var(--gap));
       font-family: var(--font-display);
       font-weight: 600;
       font-size: clamp(28px, 5vw, 56px);
@@ -36,7 +56,7 @@
     }
 
     .about-section {
-      max-width: 1200px;
+      max-width: var(--page-width);
       margin: 0 auto;
       padding: 72px var(--gap);
     }
@@ -55,7 +75,7 @@
       line-height: 1.8;
       color: var(--black);
       margin-bottom: 16px;
-      max-width: 640px;
+      max-width: var(--page-width);
     }
 
     /* Team */
@@ -75,7 +95,8 @@
     }
     .about-team__content {
       position: relative; z-index: 1;
-      max-width: 1200px; margin: 0 auto;
+      max-width: var(--page-width);
+      margin: 0 auto;
       display: grid; grid-template-columns: 1fr 1fr;
       gap: 64px; align-items: center;
     }
@@ -87,17 +108,19 @@
       font-family: var(--font-accent);
       font-style: italic; font-weight: 700; font-size: 16px;
       color: var(--red); border: 1.5px solid var(--red);
+      border-radius: 8px;
       padding: 8px 20px;
       transition: background 0.15s, color 0.15s;
     }
     .btn-outline:hover { background: var(--red); color: var(--white); }
 
     .about-impressions {
-      max-width: 1200px; margin: 0 auto;
+      max-width: var(--page-width);
+      margin: 0 auto;
       padding: 72px var(--gap);
     }
     .about-impressions img {
-      width: 100%; max-width: 700px;
+      width: 100%; max-width: var(--page-width);
       display: block; margin-bottom: 24px;
     }
 
@@ -109,27 +132,27 @@
 </head>
 <body>
 
-  <nav class="site-nav" role="navigation">
+      <nav class="site-nav" role="navigation" aria-label="Main navigation">
     <div class="site-nav__inner">
       <ul class="site-nav__links site-nav__links--left" role="list">
-        <li><a href="menu.html">Menue</a></li>
+        <li><a href="menue.html">Menue</a></li>
         <li><a href="about.html" class="active">About</a></li>
         <li><a href="jobs.html">Jobs</a></li>
       </ul>
-      <a href="index.html" class="site-nav__logo">
+      <a href="index.html" class="site-nav__logo" aria-label="YamYam Berlin Home">
         <img src="images/logos/YY_Logo_Red.svg" alt="YamYam Berlin">
       </a>
       <ul class="site-nav__links site-nav__links--right" role="list">
         <li><a href="https://app.resmio.com/yamyam-berlin/widget" target="_blank" rel="noopener">Reserve</a></li>
         <li><a href="https://wolt.com/en/deu/berlin/restaurant/yamyam" target="_blank" rel="noopener">Order Online</a></li>
         <li>
-          <a href="https://www.instagram.com/yamyamberlin" target="_blank" rel="noopener" class="site-nav__ig">
+          <a href="https://www.instagram.com/yamyamberlin" target="_blank" rel="noopener" class="site-nav__ig" aria-label="Instagram">
             <img src="images/icons/ig_icon.svg" alt="Instagram" width="28" height="28">
           </a>
         </li>
       </ul>
-      <button class="site-nav__toggle" aria-label="Menu öffnen" aria-expanded="false">
-        <span></span><span></span><span></span>
+      <button class="site-nav__burger" aria-label="Menu öffnen" aria-expanded="false">
+        <img src="images/icons/burger.png" alt="">
       </button>
     </div>
   </nav>
@@ -145,78 +168,72 @@
   <!-- Dynamic sections rendered by JS -->
   <div id="about-root"></div>
 
-  <footer class="site-footer" role="contentinfo">
+      <footer class="site-footer" role="contentinfo">
     <div class="site-footer__inner">
+      <a href="index.html" class="site-footer__logo">
+        <img src="images/logos/YY_Logo_Red.svg" alt="YamYam Berlin" height="32">
+      </a>
       <p class="site-footer__copy">© Copyright 2026 YamYam Berlin GmbH</p>
-      <nav class="site-footer__links">
-        <a href="datenschutz.html">Impressum &amp; Datenschutz</a>
-        <a href="mailto:contact@yamyam-berlin.de">contact@yamyam-berlin.de</a>
-        <a href="https://www.instagram.com/yamyamberlin" target="_blank" rel="noopener">
-          <img src="images/icons/ig_icon.svg" alt="Instagram" width="16" height="16" style="vertical-align:middle">
-        </a>
-      </nav>
+      <span></span>
+      <a href="datenschutz.html" class="site-footer__legal">Impressum &amp; Datenschutz</a>
     </div>
   </footer>
 
   <script src="config.js"></script>
   <script src="sheets.js"></script>
-  <script>
-    document.querySelector('.site-nav__toggle').addEventListener('click', function() {
-      document.querySelector('.site-nav__links').classList.toggle('open');
-    });
+        <script>
+    // Mobile burger nav
+    const burger = document.querySelector('.site-nav__burger');
+    const navLeft  = document.querySelector('.site-nav__links--left');
+    const navRight = document.querySelector('.site-nav__links--right');
+    if (burger) {
+      burger.addEventListener('click', function() {
+        const open = navLeft.classList.toggle('open');
+        navRight.classList.toggle('open');
+        this.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+    }
+  </script>
 
+  <script>
     async function renderAbout() {
       const sections = await YYSheets.getAboutData();
       const root = document.getElementById('about-root');
-
-      // Hero title = first section headline
       if (sections[0]) {
         document.getElementById('about-hero-title').textContent = sections[0].headline;
       }
-
       sections.forEach((sec, i) => {
-        // First section = intro text block
         if (i === 0) {
-          root.innerHTML += `
-            <section class="about-section">
-              <div style="max-width:640px">
-                ${sec.text.split('\n\n').map(p => `<p>${p}</p>`).join('')}
-              </div>
-            </section>`;
-          return;
-        }
-
-        // Second section = Team (with BG image)
-        if (i === 1) {
-          root.innerHTML += `
-            <section class="about-team">
-              <div class="about-team__bg">
-                <img src="images/backgrounds/yy_Folks_02.png" alt="">
-              </div>
-              <div class="about-team__content">
-                <div>
-                  <h2 class="about-section__title">${sec.headline}</h2>
-                  ${sec.text.split('\n\n').map(p => `<p>${p}</p>`).join('')}
-                  ${sec.cta ? `<a href="jobs.html" class="btn-outline">${sec.cta} →</a>` : ''}
-                </div>
-                <div class="about-team__img">
-                  <img src="images/backgrounds/yy_team.png" alt="YamYam Team">
-                </div>
-              </div>
-            </section>`;
-          return;
-        }
-
-        // Remaining = generic sections
-        root.innerHTML += `
-          <section class="about-section">
-            <h2 class="about-section__title">${sec.headline}</h2>
-            ${sec.text.split('\n\n').map(p => `<p>${p}</p>`).join('')}
-            ${sec.cta ? `<a href="jobs.html" class="btn-outline">${sec.cta} →</a>` : ''}
+          root.innerHTML += `<section class="about-section">
+            <div style="max-width:640px">
+              ${sec.text.split('\n\n').map(p => `<p>${p}</p>`).join('')}
+            </div>
           </section>`;
+          return;
+        }
+        if (i === 1) {
+          root.innerHTML += `<section class="about-team">
+            <div class="about-team__bg"><img src="images/backgrounds/yy_Folks_02.png" alt=""></div>
+            <div class="about-team__content">
+              <div>
+                <h2 class="about-section__title">${sec.headline}</h2>
+                ${sec.text.split('\n\n').map(p => `<p>${p}</p>`).join('')}
+                ${sec.cta ? `<a href="jobs.html" class="btn-outline">${sec.cta} <img src="images/icons/arrow.svg" alt="" class="btn-arrow" width="16" height="16"></a>` : ''}
+              </div>
+              <div class="about-team__img">
+                <img src="images/backgrounds/yy_team.png" alt="YamYam Team">
+              </div>
+            </div>
+          </section>`;
+          return;
+        }
+        root.innerHTML += `<section class="about-section">
+          <h2 class="about-section__title">${sec.headline}</h2>
+          ${sec.text.split('\n\n').map(p => `<p>${p}</p>`).join('')}
+          ${sec.cta ? `<a href="jobs.html" class="btn-outline">${sec.cta} <img src="images/icons/arrow.svg" alt="" class="btn-arrow" width="16" height="16"></a>` : ''}
+        </section>`;
       });
     }
-
     renderAbout().catch(err => {
       document.getElementById('about-root').innerHTML = '<p style="padding:48px">Inhalte konnten nicht geladen werden.</p>';
       console.error(err);
