@@ -96,14 +96,14 @@ function renderSection(cat) {
         : '';
     } else {
       dishHtml = dishItems.length
-        ? `<div class="dish-grid">${dishItems.map(renderDishCard).join('')}</div>`
+        ? `<div class="menu-grid">${dishItems.map(renderDishCard).join('')}</div>`
         : '';
     }
 
     // Sub-section header (only if more than one subgroup)
     const showSubHeader = Object.keys(cat.subGroups).length > 1;
     const subHeader = showSubHeader && dishItems.length
-      ? `<h3 class="drink-subheader">${formatSubGroupLabel(key)}</h3>`
+      ? `<h3 class="menu-subcategory-title">${formatSubGroupLabel(key)}</h3>`
       : '';
 
     return `${infoHtml}${subHeader}${dishHtml}`;
@@ -147,26 +147,28 @@ function renderDishCard(item) {
 
   const idLabel = item.id ? `${item.id}. ${item.name}` : item.name;
 
+  const isNew = item.zusatz.trim().toLowerCase() === 'new';
   const iconsHtml = icons.map(i => `<span class="icon icon-${i}"></span>`).join('');
-  const zusatzHtml = item.zusatz
+  const zusatzHtml = item.zusatz && !isNew
     ? `<span class="dish-card__zusatz">${item.zusatz}</span>`
     : '';
-  const accentHtml = item.zusatz
-    ? `<span class="dish-card__accent">${item.zusatz}</span>`
+  const badgeHtml = isNew
+    ? `<span class="dish-card__badge">New</span>`
     : '';
   const allergenHtml = item.allergene
     ? `<p class="dish-card__allergene">${item.allergene}</p>`
     : '';
   const priceHtml = item.preis
-    ? `<span class="price-pill">${item.preis}</span>`
+    ? `<span class="dish-card__price">${item.preis}</span>`
     : '';
 
   return `
     <article class="dish-card">
+      ${badgeHtml}
       <div class="dish-card__img-wrap">${imgHtml}</div>
       <div class="dish-card__body">
         <div class="dish-card__title-row">
-          <span class="dish-card__id">${idLabel}</span>
+          <span class="dish-card__title">${idLabel}</span>
           ${zusatzHtml}
           <span class="dish-card__icons">${iconsHtml}</span>
         </div>
@@ -175,7 +177,6 @@ function renderDishCard(item) {
         ${allergenHtml}
         <div class="dish-card__footer">
           ${priceHtml}
-          ${accentHtml}
         </div>
       </div>
     </article>

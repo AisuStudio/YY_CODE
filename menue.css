@@ -20,6 +20,7 @@
   gap: 24px;
   align-items: center;
   overflow-x: auto;
+  scrollbar-width: none;
 }
 .menu-nav__inner::-webkit-scrollbar { display: none; }
 
@@ -28,17 +29,16 @@
   padding: 14px 20px;
   font-family: var(--font-display);
   font-size: 18px;
-  color: var(--gray-mid);
+  color: var(--red);
   text-transform: uppercase;
   letter-spacing: var(--tracking-display);
   border-bottom: 2px solid transparent;
-  transition: color 0.15s, border-color 0.15s;
   white-space: nowrap;
 }
-.menu-nav__btn:hover { color: var(--black); }
+.menu-nav__btn:hover,
 .menu-nav__btn.active {
-  color: var(--red);
-  border-bottom-color: var(--red);
+  color: var(--black);
+  border-bottom-color: var(--black);
 }
 
 /* --- Page wrapper ------------------------------------------ */
@@ -64,21 +64,21 @@
 
 /* --- Section ----------------------------------------------- */
 .menu-section {
-  margin-bottom: 72px;
+  margin-bottom: 80px;
   scroll-margin-top: calc(var(--nav-height) + 52px);
 }
 .menu-section__header {
   margin-bottom: 32px;
-  padding-bottom: 12px;
-  border-bottom: 1px solid var(--red);
 }
 .menu-section__title {
   font-family: var(--font-display);
-  font-size: clamp(28px, 4vw, 48px);
+  font-weight: 500;
+  font-size: 40px;
+  line-height: 60px;
+  letter-spacing: -1.6px;
   color: var(--red);
   text-transform: uppercase;
-  letter-spacing: var(--tracking-display);
-  line-height: 1;
+  border-bottom: 1px solid var(--red);
 }
 .menu-section__subtitle {
   font-family: var(--font-accent);
@@ -104,16 +104,29 @@
 .menu-info-box .price-pill { margin-top: 12px; }
 
 /* --- Dish Card Grid ---------------------------------------- */
-.dish-grid {
+.menu-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: var(--gap);
+  gap: 32px;
 }
 
 /* Dish Card */
 .dish-card {
+  position: relative;
   display: flex;
   flex-direction: column;
+}
+.dish-card__badge {
+  position: absolute;
+  top: 8px; right: 8px;
+  z-index: 1;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--red);
+  background: var(--white);
+  padding: 4px 12px;
+  border-radius: 4px;
 }
 .dish-card__img-wrap {
   min-height: 180px;
@@ -150,45 +163,49 @@
 .dish-card__title-row {
   display: flex;
   align-items: baseline;
-  gap: 8px;
   flex-wrap: wrap;
 }
-.dish-card__id {
+.dish-card__title {
   font-family: var(--font-display);
-  font-size: clamp(16px, 1.8vw, 22px);
+  font-weight: 500;
+  font-size: 24px;
+  letter-spacing: -0.48px;
   color: var(--red);
   text-transform: uppercase;
-  letter-spacing: var(--tracking-display);
   line-height: 1.1;
   flex-shrink: 0;
 }
 .dish-card__zusatz {
   font-family: var(--font-body);
-  font-size: 11px;
-  color: var(--gray-mid);
+  font-weight: 400;
+  font-size: 10px;
+  letter-spacing: 0.4px;
+  color: var(--black);
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  margin-left: 8px;
 }
 .dish-card__icons { display: flex; gap: 4px; margin-left: auto; }
 
 .dish-card__desc-en {
   font-family: var(--font-body);
   font-weight: 400;
-  font-size: 13px;
+  font-size: 12px;
   line-height: 1.5;
   color: var(--black);
 }
 .dish-card__desc-de {
   font-family: var(--font-body);
+  font-weight: 400;
   font-size: 12px;
   line-height: 1.4;
-  color: var(--gray-text);
+  color: var(--beige-md);
 }
 .dish-card__allergene {
-  font-size: 10px;
-  color: var(--gray-mid);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 8px;
+  color: var(--black);
   text-transform: uppercase;
-  letter-spacing: 0.04em;
 }
 .dish-card__footer {
   margin-top: 8px;
@@ -197,11 +214,12 @@
   gap: 10px;
   flex-wrap: wrap;
 }
-.dish-card__accent {
-  font-family: var(--font-accent);
-  font-style: italic;
-  font-size: 12px;
-  color: var(--red);
+.dish-card__price {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 16px;
+  letter-spacing: 0.64px;
+  color: var(--black);
 }
 
 /* --- Drink List Layout ------------------------------------- */
@@ -254,16 +272,16 @@
   min-width: 60px;
 }
 
-/* Sub-headers within drink sections (e.g. Steamed / Fried) */
-.drink-subheader {
+/* Sub-headers within sections (e.g. Steamed / Fried, drink groups) */
+.menu-subcategory-title {
   font-family: var(--font-display);
-  font-size: 16px;
+  font-weight: 500;
+  font-size: 25px;
+  letter-spacing: -1px;
   color: var(--black);
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin: 20px 0 8px;
-  padding-bottom: 4px;
-  border-bottom: 1px solid var(--gray-light);
+  border-bottom: 1px solid var(--black);
+  margin-bottom: 32px;
 }
 
 /* Premium liquor: wider description */
@@ -296,21 +314,14 @@
 .extras-row__price { font-family: var(--font-accent); color: var(--red); }
 
 /* --- Responsive -------------------------------------------- */
-@media (max-width: 1200px) {
-  .dish-grid { grid-template-columns: repeat(3, 1fr); }
-}
-@media (max-width: 900px) {
-  .dish-grid { grid-template-columns: repeat(2, 1fr); }
+@media (max-width: 1024px) {
+  .menu-grid { grid-template-columns: repeat(2, 1fr); }
   .drink-row { grid-template-columns: 1fr auto; }
   .drink-row__volume { display: none; }
   .drink-row--premium { grid-template-columns: 1fr auto; }
   .drink-row__type { grid-column: 1; }
 }
-@media (max-width: 600px) {
-  .dish-grid { grid-template-columns: 1fr; }
-  .menu-section { margin-bottom: 48px; }
+@media (max-width: 767px) {
+  .menu-grid { grid-template-columns: 1fr; }
   .menu-nav__btn { font-size: 15px; padding: 12px 14px; }
-}
-@media (orientation: landscape) and (max-width: 900px) {
-  .dish-grid { grid-template-columns: repeat(2, 1fr); }
 }
