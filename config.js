@@ -166,15 +166,16 @@ const YY_CONFIG = {
 
   // Sheet column indices (0-based)
   COL: {
-    KATEGORIE: 0,
-    ID:        1,
-    NAME:      2,
-    ZUSATZ:    3,
-    DESC_DE:   4,
-    DESC_EN:   5,
-    ALLERGENE: 6,
-    PREIS:     7,
-    IMG:       8,
+    VISIBILITY: 0,
+    KATEGORIE:  1,
+    ID:         2,
+    NAME:       3,
+    ZUSATZ:     4,
+    DESC_DE:    5,
+    DESC_EN:    6,
+    ALLERGENE:  7,
+    PREIS:      8,
+    IMG:        9,
   },
 
   // Info-only row types

@@ -19,6 +19,7 @@ const YYSheets = (() => {
     const C = YY_CONFIG.COL;
     const seen = new Map();
     for (const row of rows) {
+      if ((row[C.VISIBILITY] || '').trim().toUpperCase() !== 'ON') continue;
       if (!row[C.KATEGORIE]) continue;
       const item = {
         kategorie: (row[C.KATEGORIE] || '').trim(),
@@ -95,14 +96,17 @@ const YYSheets = (() => {
   }
 
   /* ── JOBS ─────────────────────────────────────────────── */
-  // Cols: Job Titel | Anstellungsart & Zeit | Vollständiger Ausschreibungstext
+  // Cols: Visibility (ON/OFF) | Job Titel | Anstellungsart & Zeit | Vollständiger Ausschreibungstext
   async function getJobsData() {
     const rows = await fetchTab(YY_CONFIG.TABS.JOBS);
-    return rows.map(row => ({
-      title:       (row[0] || '').trim(),
-      employment:  (row[1] || '').trim(),
-      description: (row[2] || '').trim(),
-    })).filter(r => r.title);
+    return rows
+      .filter(row => (row[0] || '').trim().toUpperCase() === 'ON')
+      .map(row => ({
+        title:       (row[1] || '').trim(),
+        employment:  (row[2] || '').trim(),
+        description: (row[3] || '').trim(),
+      }))
+      .filter(r => r.title);
   }
 
   /* ── DATENSCHUTZ ──────────────────────────────────────── */
