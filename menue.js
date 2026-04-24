@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const navInner = document.getElementById('menu-nav-inner');
 
   // --- Loading state
-  menuRoot.innerHTML = '<div class="menu-loading">Loading menu…</div>';
+  menuRoot.innerHTML = '<div class="menu-loading" role="status" aria-live="polite">Loading menu…</div>';
 
   try {
     const allItems = await YYSheets.getMenuItems();
@@ -35,6 +35,7 @@ function renderNav(categories) {
     <button
       class="menu-nav__btn${i === 0 ? ' active' : ''}"
       data-cat="${cat.id}"
+      aria-label="${cat.label} Menükategorie"
       onclick="scrollToSection('${cat.id}')"
     >${cat.label}</button>
   `).join('');
