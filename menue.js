@@ -146,7 +146,7 @@ function renderDishCard(item) {
     ? `<img src="${imgSrc}" alt="${item.alt || item.name + ' – Yam Yam Berlin'}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'dish-card__img-placeholder\'>${item.name}</div>'">`
     : `<div class="dish-card__img-placeholder">${item.name}</div>`;
 
-  const idLabel = item.id ? `${item.id}. ${item.name}` : item.name;
+  const idLabel = item.id ? `${item.id} ${item.name}` : item.name;
 
   const isNew = item.zusatz.trim().toLowerCase() === 'new';
   const iconsHtml = icons.map(i => `<span class="icon icon-${i}"></span>`).join('');
