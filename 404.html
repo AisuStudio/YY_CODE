@@ -18,40 +18,50 @@
       text-align: center;
       padding-left: var(--gap);
       padding-right: var(--gap);
-      padding-bottom: 40px;
-      gap: 16px;
+      padding-bottom: 24px;
+      gap: 8px;
+    }
+    .error-page__title {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
     }
     .error-page__code {
       font-family: var(--font-display);
       font-weight: 500;
-      font-size: clamp(96px, 20vw, 220px);
+      font-size: clamp(72px, 12vw, 140px);
       line-height: 1;
       letter-spacing: var(--tracking-display);
       color: var(--red);
+      margin: 0;
     }
     .error-page__headline {
       font-family: var(--font-display);
       font-weight: 500;
-      font-size: clamp(24px, 3.5vw, 40px);
+      font-size: clamp(22px, 3vw, 36px);
       line-height: 1.1;
       letter-spacing: var(--tracking-display);
       color: var(--red);
       text-transform: uppercase;
+      margin: 0;
     }
     .error-page__img {
-      max-width: 300px;
+      max-width: 220px;
       width: 100%;
       height: auto;
-      margin: 16px 0;
+      margin: 8px 0;
     }
     .error-page__text {
       font-family: var(--font-body);
       font-size: 14px;
-      line-height: 1.5;
+      line-height: 1.4;
       color: var(--black);
+      margin: 0;
     }
     .error-page__cta {
-      margin-top: 8px;
+      margin-top: 4px;
     }
   </style>
 </head>
@@ -83,8 +93,10 @@
   </nav>
 
   <main class="error-page" role="main">
-    <h1 class="error-page__code">404</h1>
-    <p class="error-page__headline">Where is the Bibimbap?</p>
+    <div class="error-page__title">
+      <h1 class="error-page__code">404</h1>
+      <p class="error-page__headline">Where is the Bibimbap?</p>
+    </div>
     <img src="images/other/404doggo.png" alt="Verirrter Doggo" class="error-page__img">
     <p class="error-page__text">This page does not exist. But our Bibimbap does.</p>
     <a href="menue.html" class="btn-outline error-page__cta">
