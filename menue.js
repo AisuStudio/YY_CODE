@@ -142,7 +142,7 @@ function renderDishCard(item) {
     : null;
 
   const imgHtml = imgSrc
-    ? `<img src="${imgSrc}" alt="${item.name}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'dish-card__img-placeholder\'>${item.name}</div>'">`
+    ? `<img src="${imgSrc}" alt="${item.alt || item.name + ' – Yam Yam Berlin'}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'dish-card__img-placeholder\'>${item.name}</div>'">`
     : `<div class="dish-card__img-placeholder">${item.name}</div>`;
 
   const idLabel = item.id ? `${item.id}. ${item.name}` : item.name;

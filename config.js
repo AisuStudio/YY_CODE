@@ -165,7 +165,7 @@ const YY_CONFIG = {
   ],
 
   // Sheet column indices (0-based)
-  COL: {
+COL: {
     VISIBILITY: 0,
     KATEGORIE:  1,
     ID:         2,
@@ -175,7 +175,8 @@ const YY_CONFIG = {
     DESC_EN:    6,
     ALLERGENE:  7,
     PREIS:      8,
-    IMG:        9,
+    ALT:        9,
+    IMG:        10,
   },
 
   // Info-only row types

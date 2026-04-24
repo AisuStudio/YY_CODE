@@ -31,6 +31,7 @@ const YYSheets = (() => {
         allergene: (row[C.ALLERGENE] || '').trim(),
         preis:     (row[C.PREIS]     || '').trim(),
         img:       (row[C.IMG]       || '').trim(),
+        alt:       (row[C.ALT]       || '').trim(),
       };
       const key = `${item.kategorie}|${item.name}|${item.zusatz}`;
       seen.set(key, item);
