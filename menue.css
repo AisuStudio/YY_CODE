@@ -84,7 +84,7 @@
   font-family: var(--font-accent);
   font-style: italic;
   font-size: 13px;
-  color: var(--gray-text);
+  color: var(--beige-md);
   margin-top: 6px;
 }
 
@@ -100,7 +100,7 @@
   line-height: 1.6;
   color: var(--black);
 }
-.menu-info-box p + p { margin-top: 6px; color: var(--gray-text); }
+.menu-info-box p + p { margin-top: 6px; color: var(--beige-md); }
 .menu-info-box .price-pill { margin-top: 12px; }
 
 /* --- Dish Card Grid ---------------------------------------- */
@@ -151,7 +151,7 @@
   align-items: center;
   justify-content: center;
   background: var(--bg);
-  color: var(--gray-mid);
+  color: var(--beige-md);
   font-size: 11px;
   font-family: var(--font-body);
   text-transform: uppercase;
@@ -250,7 +250,7 @@
 }
 .drink-row__desc {
   font-size: 12px;
-  color: var(--gray-text);
+  color: var(--beige-md);
   font-weight: 400;
   text-transform: none;
   letter-spacing: 0;
@@ -259,7 +259,7 @@
 }
 .drink-row__volume {
   font-size: 12px;
-  color: var(--gray-mid);
+  color: var(--beige-md);
   white-space: nowrap;
   text-align: right;
 }
