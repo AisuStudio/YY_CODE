@@ -64,11 +64,11 @@
 
 /* --- Section ----------------------------------------------- */
 .menu-section {
-  margin-bottom: 80px;
+  margin-bottom: var(--space-lg);
   scroll-margin-top: calc(var(--nav-height) + 52px);
 }
 .menu-section__header {
-  margin-bottom: 32px;
+  margin-bottom: var(--space-md);
 }
 .menu-section__title {
   font-family: var(--font-display);
@@ -92,7 +92,7 @@
 .menu-info-box {
   background: var(--bg);
   padding: 20px 24px;
-  margin-bottom: 32px;
+  margin-bottom: var(--space-md);
   border-left: 3px solid var(--red);
 }
 .menu-info-box p {
@@ -208,7 +208,7 @@
   text-transform: uppercase;
 }
 .dish-card__footer {
-  margin-top: 8px;
+  margin-top: var(--space-sm);
   display: flex;
   align-items: center;
   gap: 10px;
@@ -281,6 +281,7 @@
   color: var(--black);
   text-transform: uppercase;
   border-bottom: 1px solid var(--black);
+  margin-top: var(--space-lg);
   margin-bottom: 32px;
 }
 

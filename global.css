@@ -71,6 +71,11 @@
   --nav-height: 100px;
   --gap:        40px;        /* padding left/right inside page-width */
 
+  --space-sm:   20px;
+  --space-md:   40px;
+  --space-lg:   80px;
+  --space-xl:  120px;
+
   --fs-small:   11px;
   --fs-body:    14px;
   --fs-body-lg: 16px;

@@ -123,7 +123,7 @@ function renderSection(cat) {
 /* ---- Info box --------------------------------------------- */
 function renderInfoBox(item) {
   const priceHtml = item.preis
-    ? `<span class="price-pill">${item.preis}</span>`
+    ? `<span class="dish-card__price">${item.preis}</span>`
     : '';
   return `
     <div class="menu-info-box">
