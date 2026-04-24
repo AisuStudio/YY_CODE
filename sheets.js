@@ -22,6 +22,7 @@ const YYSheets = (() => {
       if ((row[C.VISIBILITY] || '').trim().toUpperCase() !== 'ON') continue;
       if (!row[C.KATEGORIE]) continue;
       const item = {
+        _order: seen.size,
         kategorie: (row[C.KATEGORIE] || '').trim(),
         id:        (row[C.ID]        || '').trim(),
         name:      (row[C.NAME]      || '').trim(),
@@ -49,6 +50,7 @@ const YYSheets = (() => {
         if (!subGroups[item.kategorie]) subGroups[item.kategorie] = [];
         subGroups[item.kategorie].push(item);
       }
+      Object.values(subGroups).forEach(arr => arr.sort((a, b) => a._order - b._order));
       return { ...cat, subGroups, items: catItems };
     });
   }
