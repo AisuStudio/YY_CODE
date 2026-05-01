@@ -124,6 +124,17 @@ const YY_CONFIG = {
     'Sesame_Ice':              'P1133416-eiscremes_sesam_240',
   },
 
+  SLIDESHOW: [
+    '190615_YamYam_10thAnniversary_by_Julia_Zierer_DSC05314.jpg',
+    '190615_YamYam_10thAnniversary_by_Julia_Zierer_DSC06043.png',
+    '190615_YamYam_10thAnniversary_by_Julia_Zierer_Romano_DeathMetalKutte.png',
+    '190615_YamYam_10thAnniversary_by_Julia_Zierer_Sumi_Romano.png',
+    '190704_catering4.png',
+    '190704_catering9.png',
+    'SM9A5272_yamyam_@_steve_bergmann.jpg',
+    'SM9A9159_set_images_yamyam_xberg.jpg',
+  ],
+
   // Navigation categories
   MENU_CATEGORIES: [
     {
@@ -165,7 +176,7 @@ const YY_CONFIG = {
   ],
 
   // Sheet column indices (0-based)
-COL: {
+  COL: {
     VISIBILITY: 0,
     KATEGORIE:  1,
     ID:         2,

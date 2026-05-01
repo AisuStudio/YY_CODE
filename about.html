@@ -206,15 +206,29 @@
       if (sections[0]) {
         document.getElementById('about-hero-title').textContent = sections[0].headline;
       }
+      const impressionsIdx = sections.findIndex((s, i) => i > 0 && /impression/i.test(s.headline || ''));
+      const captionHtml = impressionsIdx > -1 ? `
+          <div class="about-slideshow__caption">
+            <h3>${sections[impressionsIdx].headline}</h3>
+            ${sections[impressionsIdx].text.split('\n\n').map(p => `<p>${p.replace(/\n/g, '<br>')}</p>`).join('')}
+          </div>` : '';
       sections.forEach((sec, i) => {
         if (i === 0) {
           root.innerHTML += `<section class="about-section">
             <div style="max-width:640px">
               ${sec.text.split('\n\n').map(p => `<p>${p}</p>`).join('')}
             </div>
-          </section>`;
+          </section>
+          <section class="about-slideshow" aria-label="Yam Yam Berlin Impressionen">
+            <div class="about-slideshow__inner">
+              <div class="about-slideshow__images" id="slideshow-images"></div>
+              <img src="images/about/yy_streifen_yellow.svg" alt="" class="about-slideshow__svg about-slideshow__svg--top">
+              <img src="images/about/yy_korean_purple.svg" alt="" class="about-slideshow__svg about-slideshow__svg--bottom">
+            </div>
+          </section>${captionHtml}`;
           return;
         }
+        if (i === impressionsIdx) return;
         if (i === 1) {
           root.innerHTML += `<section class="about-team">
             <div class="about-team__bg"><img src="images/backgrounds/yy_Folks_02.png" alt=""></div>
@@ -237,6 +251,25 @@
           ${sec.cta ? `<a href="jobs.html" class="btn-outline">${sec.cta} <img src="images/icons/arrow.svg" alt="" class="btn-arrow" width="16" height="16"></a>` : ''}
         </section>`;
       });
+
+      const slideshowEl = document.getElementById('slideshow-images');
+      if (slideshowEl && YY_CONFIG.SLIDESHOW) {
+        YY_CONFIG.SLIDESHOW.forEach((file, i) => {
+          const img = document.createElement('img');
+          img.src = `images/slideshow/${file}`;
+          img.alt = '';
+          img.loading = i === 0 ? 'eager' : 'lazy';
+          if (i === 0) img.classList.add('active');
+          slideshowEl.appendChild(img);
+        });
+        let currentIndex = 0;
+        const slides = slideshowEl.querySelectorAll('img');
+        setInterval(() => {
+          slides[currentIndex].classList.remove('active');
+          currentIndex = (currentIndex + 1) % slides.length;
+          slides[currentIndex].classList.add('active');
+        }, 5000);
+      }
     }
     renderAbout().catch(err => {
       document.getElementById('about-root').innerHTML = '<p style="padding:48px">Inhalte konnten nicht geladen werden.</p>';
