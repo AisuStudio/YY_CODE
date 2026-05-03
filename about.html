@@ -25,7 +25,7 @@
   <meta name="twitter:image" content="https://yamyam-berlin.de/images/backgrounds/yy_about_venue.jpg">
   <link rel="stylesheet" href="global.css">
   <style>
-    body { padding-top: var(--nav-height); }
+    body { margin: 0; overflow-x: hidden; }
 
     .about-hero {
       position: relative;
@@ -129,11 +129,12 @@
     gtag('config', 'G-8R7Y231MWN', { anonymize_ip: true });
   </script>
 </head>
-<body>
+<body style="padding-top: 0">
 
       <nav class="site-nav" role="navigation" aria-label="Main navigation">
     <div class="site-nav__inner">
       <ul class="site-nav__links site-nav__links--left" role="list">
+        <li><a href="index.html">Home</a></li>
         <li><a href="menue.html">Menue</a></li>
         <li><a href="about.html" class="active">About</a></li>
         <li><a href="jobs.html">Jobs</a></li>
@@ -144,6 +145,7 @@
       <ul class="site-nav__links site-nav__links--right" role="list">
         <li><a href="https://app.resmio.com/yamyam-berlin/widget" target="_blank" rel="noopener">Reserve</a></li>
         <li><a href="https://wolt.com/en/deu/berlin/restaurant/yamyam" target="_blank" rel="noopener">Order Online</a></li>
+        <li class="mobile-only"><a href="datenschutz.html">Impressum &amp; Datenschutz</a></li>
         <li>
           <a href="https://www.instagram.com/yamyamberlin" target="_blank" rel="noopener" class="site-nav__ig" aria-label="Instagram">
             <img src="images/icons/ig_icon.svg" alt="Instagram" width="28" height="28">
@@ -215,6 +217,7 @@
       sections.forEach((sec, i) => {
         if (i === 0) {
           root.innerHTML += `<section class="about-section">
+            <h2 class="about-section__title">${sec.headline}</h2>
             <div style="max-width:640px">
               ${sec.text.split('\n\n').map(p => `<p>${p}</p>`).join('')}
             </div>
@@ -236,7 +239,7 @@
               <div>
                 <h2 class="about-section__title">${sec.headline}</h2>
                 ${sec.text.split('\n\n').map(p => `<p>${p}</p>`).join('')}
-                ${sec.cta ? `<a href="jobs.html" class="btn-outline">${sec.cta} <img src="images/icons/arrow.svg" alt="" class="btn-arrow" width="16" height="16"></a>` : ''}
+                ${sec.cta ? `<a href="jobs.html" class="btn-outline" style="margin-top:20px">${sec.cta} <img src="images/icons/arrow.svg" alt="" class="btn-arrow" width="16" height="16"></a>` : ''}
               </div>
               <div class="about-team__img">
                 <img src="images/backgrounds/yy_team.png" alt="YamYam Team">

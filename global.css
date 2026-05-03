@@ -206,6 +206,9 @@ a:hover, a.active { color: var(--black); }
 }
 .site-nav__ig:hover img { filter: brightness(0); }
 
+/* Mobile-only nav items — hidden on desktop, visible <= 900px */
+.mobile-only { display: none; }
+
 /* Hamburger — hidden on desktop */
 .site-nav__burger {
   display: none;
@@ -241,20 +244,89 @@ a:hover, a.active { color: var(--black); }
     display: flex;
     flex-direction: column;
     position: fixed;
-    top: var(--nav-height);
     left: 0; right: 0;
-    background: var(--bg);
-    padding: 32px var(--gap);
-    gap: 24px;
+    background: rgba(235, 231, 224, 0.7);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    padding: 0 var(--gap);
     z-index: 99;
-    border-top: 1px solid var(--gray-light);
+  }
+  .site-nav__links--left.open {
+    top: var(--nav-height);
+    bottom: 50%;
+    padding-top: 24px;
+    padding-bottom: 12px;
+    justify-content: flex-end;
+    gap: 20px;
+  }
+  .site-nav__links--right.open {
+    top: 50%;
+    bottom: 0;
+    padding-top: 12px;
+    padding-bottom: 24px;
+    justify-content: flex-start;
+    gap: 20px;
+  }
+  .site-nav__links--left.open li,
+  .site-nav__links--right.open li {
+    padding: 4px 0;
   }
   .site-nav__links--left.open a,
-  .site-nav__links--right.open a { font-size: 36px; color: var(--red); }
+  .site-nav__links--right.open a {
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--red);
+  }
   .site-nav__links--left.open a:hover,
-  .site-nav__links--right.open a:hover { color: var(--black); }
+  .site-nav__links--left.open a.active,
+  .site-nav__links--right.open a:hover,
+  .site-nav__links--right.open a.active { color: var(--black); }
   .site-nav__logo img { height: 48px; }
   .site-nav__burger { display: flex; }
+  .mobile-only { display: list-item; }
+
+  /* Home sections — alternating side alignment on mobile */
+  .home-section.home-section--location .home-section__content,
+  .home-section.home-section--about .home-section__content {
+    grid-column: 2;
+    text-align: right;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .home-section.home-section--menue .home-section__content {
+    grid-column: 1;
+    text-align: left;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .home-section.home-section--location .btn-outline,
+  .home-section.home-section--about .btn-outline {
+    margin-left: auto;
+  }
+  .home-section.home-section--menue .btn-outline {
+    margin-right: auto;
+  }
+  .home-section.home-section--location .hours-table,
+  .home-section.home-section--about .hours-table {
+    margin-left: auto;
+  }
+
+  /* Jobs — pull to left on mobile */
+  .home-jobs__content {
+    justify-content: flex-start;
+  }
+  .home-jobs__inner {
+    width: 100%;
+    text-align: left;
+  }
+
+  /* About slideshow — hide decorative SVGs on mobile */
+  .about-slideshow__svg {
+    display: none;
+  }
 }
 
 /* --- Footer ------------------------------------------------ */

@@ -235,7 +235,8 @@
     @media (max-width: 900px) {
       .location-inner { grid-template-columns: 1fr; }
       .about-inner { grid-template-columns: 1fr; }
-      .home-jobs__content { grid-template-columns: 1fr; }
+      .home-jobs__content { justify-content: flex-start; }
+      .home-jobs__inner { width: 100%; }
       .home-plane {
       position: fixed;
       left: 0;
@@ -355,6 +356,7 @@
       <nav class="site-nav" role="navigation" aria-label="Main navigation">
     <div class="site-nav__inner">
       <ul class="site-nav__links site-nav__links--left" role="list">
+        <li><a href="index.html" class="active">Home</a></li>
         <li><a href="menue.html">Menue</a></li>
         <li><a href="about.html">About</a></li>
         <li><a href="jobs.html">Jobs</a></li>
@@ -365,6 +367,7 @@
       <ul class="site-nav__links site-nav__links--right" role="list">
         <li><a href="https://app.resmio.com/yamyam-berlin/widget" target="_blank" rel="noopener">Reserve</a></li>
         <li><a href="https://wolt.com/en/deu/berlin/restaurant/yamyam" target="_blank" rel="noopener">Order Online</a></li>
+        <li class="mobile-only"><a href="datenschutz.html">Impressum &amp; Datenschutz</a></li>
         <li>
           <a href="https://www.instagram.com/yamyamberlin" target="_blank" rel="noopener" class="site-nav__ig" aria-label="Instagram">
             <img src="images/icons/ig_icon.svg" alt="Instagram" width="28" height="28">
@@ -406,7 +409,7 @@
       </section>
 
       <!-- LOCATION -->
-      <section class="home-section">
+      <section class="home-section home-section--location">
         <div class="home-section__inner">
           <div class="home-section__content">
             <h2 class="home-section__title">Location</h2>
@@ -423,7 +426,7 @@
       </section>
 
       <!-- MENUE -->
-      <section class="home-section home-section--right">
+      <section class="home-section home-section--right home-section--menue">
         <div class="home-section__inner">
           <div class="home-section__content">
             <h2 class="home-section__title">Menue</h2>
@@ -437,7 +440,7 @@
       </section>
 
       <!-- ABOUT -->
-      <section class="home-section">
+      <section class="home-section home-section--about">
         <div class="home-section__inner">
           <div class="home-section__content">
             <h2 class="home-section__title">About<br>YamYam Berlin</h2>
@@ -578,11 +581,17 @@
     window.addEventListener('resize', updatePlane);
     updatePlane();
 
-    // Mobile nav toggle
-    document.querySelector('.site-nav__toggle').addEventListener('click', function() {
-      document.querySelector('.site-nav__links').classList.toggle('open');
-      this.setAttribute('aria-expanded', this.getAttribute('aria-expanded') === 'false' ? 'true' : 'false');
-    });
+    // Mobile burger nav
+    const burger = document.querySelector('.site-nav__burger');
+    const navLeft  = document.querySelector('.site-nav__links--left');
+    const navRight = document.querySelector('.site-nav__links--right');
+    if (burger) {
+      burger.addEventListener('click', function() {
+        const open = navLeft.classList.toggle('open');
+        navRight.classList.toggle('open');
+        this.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+    }
   </script>
 </body>
 </html>
