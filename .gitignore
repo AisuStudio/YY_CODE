@@ -1,0 +1,16 @@
+# macOS
+.DS_Store
+
+# Backups & archives
+*.BAK
+*.bak
+*.zip
+
+# Documents (notes, exports)
+*.pdf
+*.csv
+
+# Local working folders
+Backup/
+Stickerbogen/
+aboutski/
