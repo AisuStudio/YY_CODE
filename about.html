@@ -44,7 +44,7 @@
     .about-hero__title {
       position: absolute;
       bottom: 48px;
-      left: calc((100% - var(--page-width)) / 2 + var(--gap));
+      left: calc((100% - var(--content-width)) / 2 + var(--gap));
       font-family: var(--font-display);
       font-weight: 600;
       font-size: clamp(28px, 5vw, 56px);
@@ -56,7 +56,7 @@
     }
 
     .about-section {
-      max-width: var(--page-width);
+      max-width: var(--content-width);
       margin: 0 auto;
       padding: 72px var(--gap);
     }
@@ -72,7 +72,6 @@
     .about-section p {
       font-family: var(--font-body);
       font-size: var(--fs-body-lg);
-      line-height: 1.8;
       color: var(--black);
       margin-bottom: 16px;
       max-width: var(--page-width);
@@ -95,7 +94,7 @@
     }
     .about-team__content {
       position: relative; z-index: 1;
-      max-width: var(--page-width);
+      max-width: var(--content-width);
       margin: 0 auto;
       display: grid; grid-template-columns: 1fr 1fr;
       gap: 64px; align-items: center;
@@ -105,7 +104,7 @@
     
 
     .about-impressions {
-      max-width: var(--page-width);
+      max-width: var(--content-width);
       margin: 0 auto;
       padding: 72px var(--gap);
     }
@@ -134,7 +133,6 @@
       <nav class="site-nav" role="navigation" aria-label="Main navigation">
     <div class="site-nav__inner">
       <ul class="site-nav__links site-nav__links--left" role="list">
-        <li><a href="index.html">Home</a></li>
         <li><a href="menue.html">Menue</a></li>
         <li><a href="about.html" class="active">About</a></li>
         <li><a href="jobs.html">Jobs</a></li>
@@ -159,8 +157,8 @@
   </nav>
 
   <!-- NAV GRADIENT FADER -->
-  <div style="position:sticky;top:var(--nav-height);z-index:89;pointer-events:none;margin-bottom:-30px;width:100%;height:30px;">
-    <img src="images/backgrounds/yy_gradient_fader_nav.png" alt="" style="width:100%;height:100%;object-fit:fill;display:block;">
+  <div style="position:fixed;top:0;left:0;right:0;z-index:89;pointer-events:none;">
+    <img src="images/backgrounds/yy_gradient_fader_nav_03.png" alt="" style="width:100%;height:300px;object-fit:cover;object-position:top;display:block;">
   </div>
 
   <!-- Hero -->

@@ -38,13 +38,14 @@
     }
     .home-hero__bg {
       position: absolute;
-      inset: 0;
+      top: 0; left: 0; right: 0;
       z-index: 0;
+      pointer-events: none;
     }
     .home-hero__bg img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      object-position: center top;
+      width: 100%;
+      height: auto;
+      display: block;
     }
 
     
@@ -75,7 +76,7 @@
       width: 100%;
     }
     .home-section__inner {
-      max-width: var(--page-width);
+      max-width: calc(var(--page-width) * 0.75);
       margin: 0 auto;
       padding: 40px var(--gap);
       display: grid;
@@ -85,13 +86,13 @@
     .home-section .home-section__content {
       grid-column: 1;
       text-align: right;
-      padding-right: 48px;
+      padding-right: 4px;
     }
     /* Right sections — content left-aligned from center */
     .home-section--right .home-section__content {
       grid-column: 2;
       text-align: left;
-      padding-left: 48px;
+      padding-left: 4px;
     }
     .home-section--right .hours-table { margin-left: 0; }
 
@@ -103,23 +104,25 @@
       letter-spacing: var(--tracking-display);
       text-transform: uppercase;
       color: var(--red);
+      line-height: 1;
       margin-bottom: 12px;
     }
 
     /* ── Opening Hours ── */
-    .hours-table { width: 100%; border-collapse: collapse; }
     .hours-table { border-collapse: collapse; }
     .hours-table td {
       font-family: var(--font-body);
       font-size: var(--fs-body);
       line-height: 1.2;
-      padding: 3px 24px 3px 0;
+      padding: 3px 0;
       color: var(--black);
       vertical-align: top;
+      white-space: nowrap;
     }
+    .hours-table td:not(:last-child) { padding-right: 40px; }
     .hours-table tr { height: auto; }
-    .hours-table td:first-child { color: var(--gray-text); min-width: 120px; }
-    .hours-table td:nth-child(2) { font-weight: 700; min-width: 160px; }
+    .hours-table td:first-child { color: var(--gray-text); }
+    .hours-table td:nth-child(2) { font-weight: 700; }
     .hours-table td:nth-child(3) { color: var(--gray-text); }
 
     /* ── Location ── */
@@ -127,7 +130,6 @@
     .location-address {
       font-family: var(--font-body);
       font-size: var(--fs-body-lg);
-      line-height: 1.8;
       color: var(--black);
     }
     .location-address strong { display: block; font-weight: 700; margin-bottom: 4px; }
@@ -137,7 +139,7 @@
       font-family: var(--font-display);
       font-size: 20px;
       font-weight: 600;
-      letter-spacing: var(--tracking-display);
+      letter-spacing: calc(var(--tracking-display) + 0.05em);
       color: var(--red);
       transition: color 0.15s;
     }
@@ -149,7 +151,6 @@
     .menue-teaser p {
       font-family: var(--font-body);
       font-size: var(--fs-body-lg);
-      line-height: 1.8;
       color: var(--black);
       margin-bottom: 4px;
     }
@@ -159,7 +160,6 @@
     .about-inner p {
       font-family: var(--font-body);
       font-size: var(--fs-body-lg);
-      line-height: 1.8;
       color: var(--black);
       margin-bottom: 16px;
     }
@@ -187,7 +187,7 @@
     .home-jobs__content {
       position: relative;
       z-index: 1;
-      max-width: var(--page-width);
+      max-width: calc(var(--page-width) * 0.75);
       margin: 0 auto;
       padding: 0 var(--gap);
       display: flex;
@@ -203,6 +203,7 @@
       letter-spacing: var(--tracking-display);
       text-transform: uppercase;
       color: var(--red);
+      line-height: 1;
       margin-bottom: 12px;
     }
     .jobs-list { list-style: none; padding: 0; margin: 0 0 32px; }
@@ -277,10 +278,12 @@
       font-family: var(--font-body);
       font-size: var(--fs-body);
       line-height: 1.2;
-      padding: 3px 24px 3px 0;
+      padding: 3px 0;
       color: var(--black);
       vertical-align: top;
+      white-space: nowrap;
     }
+    .hours-table td:not(:last-child) { padding-right: 40px; }
     .hours-table tr { height: auto; }
     }
   </style>
@@ -356,7 +359,6 @@
       <nav class="site-nav" role="navigation" aria-label="Main navigation">
     <div class="site-nav__inner">
       <ul class="site-nav__links site-nav__links--left" role="list">
-        <li><a href="index.html" class="active">Home</a></li>
         <li><a href="menue.html">Menue</a></li>
         <li><a href="about.html">About</a></li>
         <li><a href="jobs.html">Jobs</a></li>
@@ -380,15 +382,15 @@
     </div>
   </nav>
 
-  <!-- GRADIENT FADER UNDER NAV -->
-  <div style="position:sticky;top:var(--nav-height);z-index:89;pointer-events:none;margin-bottom:-30px;width:100%;height:30px;">
-    <img src="images/backgrounds/yy_gradient_fader_nav.png" alt="" style="width:100%;height:100%;object-fit:fill;display:block;">
+  <!-- GRADIENT FADER BEHIND NAV -->
+  <div style="position:fixed;top:0;left:0;right:0;z-index:89;pointer-events:none;">
+    <img src="images/backgrounds/yy_gradient_fader_nav_03.png" alt="" style="width:100%;height: 120px;0px;object-fit:cover;object-position:top;display:block;">
   </div>
 
   <!-- HERO -->
   <div class="home-hero">
     <div class="home-hero__bg">
-      <img src="images/backgrounds/yy_seoul_bg.png" alt="Seoul Skyline">
+      <img src="images/backgrounds/yy_seoul_bg_02.png" alt="Seoul Skyline">
     </div>
     <img class="home-plane" src="images/backgrounds/yy_plane.png" alt="">
 
@@ -549,7 +551,7 @@
     const plane    = document.querySelector('.home-plane');
     const hero     = document.querySelector('.home-hero');
     const menuLink = document.querySelector('.site-nav__links--left a:first-child');
-    const PARALLAX = 0.18; // perfekter wert — nicht ändern
+    const PARALLAX = 0.28; // perfekter wert — nicht ändern
 
     const navH     = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-height')) || 100;
     const startTop = navH + 60;

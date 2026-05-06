@@ -55,7 +55,7 @@
   --red:        #FF1705;
   --black:      #000000;
   --white:      #FFFFFF;
-  --bg:         #EBE7E0;
+  --bg:         #e7e4df;
   --gray-light: #D8D4CD;
   --gray-mid:   #999999;
   --gray-text:  #555555;
@@ -67,9 +67,10 @@
 
   --tracking-display: -0.05em;
 
-  --page-width: 1400px;   /* max content width — change here to affect all */
-  --nav-height: 100px;
-  --gap:        40px;        /* padding left/right inside page-width */
+  --page-width:    1400px;   /* nav + footer max width */
+  --content-width: 1000px;   /* section content max width (Home, About, Jobs, Menue) */
+  --nav-height:    100px;
+  --gap:           40px;     /* padding left/right inside page-width */
 
   --space-sm:   20px;
   --space-md:   40px;
@@ -96,6 +97,18 @@ a { color: inherit; text-decoration: none; }
 button { cursor: pointer; border: none; background: none; font: inherit; }
 ul, ol { list-style: none; }
 
+/* --- Display headlines: tight line-height ------------------ */
+h1, h2, h3, h4, h5, h6,
+.t-display,
+.home-section__title,
+.about-section__title,
+.about-hero__title,
+.about-slideshow__caption h3,
+.menu-section__title,
+.menu-subcategory-title {
+  line-height: 1;
+}
+
 /* --- Page wrapper ------------------------------------------ */
 /* Use this on any full-width section's inner container */
 .page-wrap {
@@ -110,12 +123,13 @@ a { color: var(--red); transition: color 0.15s; }
 a:hover, a.active { color: var(--black); }
 
 /* --- Typography -------------------------------------------- */
+p { line-height: 1.4; }
 .t-display { font-family: var(--font-display); font-weight: 500; text-transform: uppercase; letter-spacing: var(--tracking-display); color: var(--red); }
 .t-display--lg { font-size: clamp(28px, 4vw, 48px); line-height: 1; }
 .t-display--md { font-size: clamp(20px, 2.5vw, 30px); line-height: 1; }
 .t-display--sm { font-size: clamp(16px, 1.8vw, 22px); line-height: 1.1; }
 .t-body-strong { font-family: var(--font-body); font-weight: 700; font-size: 14px; line-height: 1.5; }
-.t-body        { font-family: var(--font-body); font-weight: 400; font-size: 14px; line-height: 1.5; color: var(--black); }
+.t-body        { font-family: var(--font-body); font-weight: 400; font-size: 14px; line-height: 1.4; color: var(--black); }
 .t-small       { font-family: var(--font-body); font-weight: 400; font-size: 11px; line-height: 1.4; color: var(--beige-md); letter-spacing: 0.04em; text-transform: uppercase; }
 .t-accent      { font-family: var(--font-accent); font-style: italic; font-size: 13px; color: var(--beige-md); }
 .t-price       { font-family: var(--font-accent); font-size: 14px; font-weight: 400; color: var(--beige-md); }
@@ -139,7 +153,7 @@ a:hover, a.active { color: var(--black); }
   top: 0; left: 0; right: 0;
   z-index: 100;
   height: var(--nav-height);
-  background: var(--bg);
+  background: transparent;
   display: flex;
   align-items: center;
 }
@@ -155,10 +169,18 @@ a:hover, a.active { color: var(--black); }
 .site-nav__links {
   display: flex;
   align-items: center;
-  gap: 48px;
 }
-.site-nav__links--left  { justify-content: flex-start; }
-.site-nav__links--right { justify-content: flex-end; align-items: center; }
+.site-nav__links--left {
+  justify-content: space-between;
+  width: 100%;
+  padding-right: 120px;
+}
+.site-nav__links--right {
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding-left: 120px;
+}
 
 /* Nav links — red default, black hover/active */
 .site-nav__links a {
