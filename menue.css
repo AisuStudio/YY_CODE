@@ -3,11 +3,14 @@
    Menu page: category nav, dish cards, drink list, grid
    ============================================================ */
 
+/* Override: gradient fader extends past sub-nav on menue page */
+.nav-gradient-fader img { height: 200px; }
+
 /* --- Category Nav (sticky sub-nav) ------------------------- */
 .menu-nav {
   position: sticky;
   top: var(--nav-height);
-  z-index: 50;
+  z-index: 90;
   background: var(--bg);
   border-bottom: 1px solid var(--gray-light);
   padding: 12px 0;
@@ -74,11 +77,12 @@
   font-family: var(--font-display);
   font-weight: 500;
   font-size: 40px;
-  line-height: 60px;
+  line-height: 1;
   letter-spacing: -1.6px;
   color: var(--red);
   text-transform: uppercase;
   border-bottom: 1px solid var(--red);
+  padding-bottom: 12px;
 }
 .menu-section__subtitle {
   font-family: var(--font-accent);
@@ -282,6 +286,7 @@
   color: var(--black);
   text-transform: uppercase;
   border-bottom: 1px solid var(--black);
+  padding-bottom: 12px;
   margin-top: var(--space-md);
   margin-bottom: 32px;
 }

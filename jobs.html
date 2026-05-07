@@ -41,11 +41,21 @@
       width: 100%;
       position: relative; z-index: 1;
     }
-    .jobs-hero__bg { position: absolute; inset: 0; pointer-events: none; }
+    .jobs-hero__bg {
+      position: fixed;
+      top: 50px;
+      left: 0;
+      width: 100vw;
+      height: auto;
+      z-index: 0;
+      pointer-events: none;
+      overflow: visible;
+    }
     .jobs-hero__bg img {
-      width: 100%; height: 100%;
-      object-fit: cover; object-position: center;
-      opacity: 0.25;
+      width: 100vw;
+      height: auto;
+      display: block;
+      opacity: 0.35;
     }
     .jobs-hero__title {
       position: relative; z-index: 1;
@@ -59,18 +69,13 @@
 
     
 
-    /* Apply button top */
-    .jobs-apply-bar {
-      padding: 24px var(--gap);
-      max-width: var(--page-width);
-      margin: 0 auto;
-    }
-
     /* Job listings */
     .jobs-list-section {
+      position: relative;
+      z-index: 1;
       max-width: var(--content-width);
       margin: 0 auto;
-      padding: 0 var(--gap) 80px;
+      padding: 24px var(--gap) 80px;
     }
     .job-entry {
       border-top: 1px solid var(--gray-light);
@@ -149,8 +154,8 @@
   </nav>
 
   <!-- NAV GRADIENT FADER -->
-  <div style="position:fixed;top:0;left:0;right:0;z-index:89;pointer-events:none;">
-    <img src="images/backgrounds/yy_gradient_fader_nav_03.png" alt="" style="width:100%;height:300px;object-fit:cover;object-position:top;display:block;">
+  <div class="nav-gradient-fader">
+    <img src="images/backgrounds/yy_gradient_fader_nav_03.png" alt="">
   </div>
 
   <!-- Hero -->
@@ -162,11 +167,6 @@
       <h1 class="jobs-hero__title">Jobs</h1>
     </div>
   </section>
-
-  <!-- Apply button -->
-  <div class="jobs-apply-bar">
-    <a href="mailto:jobs@yamyam-berlin.de" class="btn-outline">Apply <img src="images/icons/arrow.svg" alt="" class="btn-arrow" width="16" height="16"></a>
-  </div>
 
   <!-- Job listings -->
   <div id="jobs-loading" style="padding:48px var(--gap)">Loading…</div>
@@ -205,16 +205,21 @@
       const root = document.getElementById('jobs-root');
       const loading = document.getElementById('jobs-loading');
       if (loading) loading.remove();
-      root.innerHTML = jobs.map(job => `
-        <div class="job-entry">
-          <div class="job-entry__header">
-            <span class="job-entry__title">${job.title}</span>
-            <span class="job-entry__employment">${job.employment}</span>
+      root.innerHTML = jobs.map(job => {
+        const subject = encodeURIComponent(`Bewerbung / Application: ${job.title}`);
+        return `
+          <div class="job-entry">
+            <div class="job-entry__header">
+              <span class="job-entry__title">${job.title}</span>
+              <span class="job-entry__employment">${job.employment}</span>
+            </div>
+            <p class="job-entry__desc">${job.description}</p>
+            <a href="mailto:jobs@yamyam-berlin.de?subject=${subject}" class="btn-outline" style="margin-top: 16px">
+              Apply <img src="images/icons/arrow.svg" alt="" class="btn-arrow" width="16" height="16">
+            </a>
           </div>
-          <p class="job-entry__desc">${job.description}</p>
-        </div>
-      `).join('');
-      root.innerHTML += `<a href="mailto:jobs@yamyam-berlin.de" class="btn-outline" style="margin-top:48px">Apply <img src="images/icons/arrow.svg" alt="" class="btn-arrow" width="16" height="16"></a>`;
+        `;
+      }).join('');
     }
     renderJobs().catch(err => {
       const loading = document.getElementById('jobs-loading');

@@ -25,26 +25,30 @@
   <meta name="twitter:image" content="https://yamyam-berlin.de/images/backgrounds/yy_about_venue.jpg">
   <link rel="stylesheet" href="global.css">
   <style>
-    body { margin: 0; overflow-x: hidden; }
+    body { margin: 0; overflow-x: hidden; padding-top: var(--nav-height); }
 
     .about-hero {
-      position: relative;
-      min-height: 55vh;
-      overflow: hidden;
-      background: var(--bg);
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 0;
+      pointer-events: none;
     }
     .about-hero__bg {
-      position: absolute; inset: 0;
+      width: 100%;
     }
     .about-hero__bg img {
-      width: 100%; height: 100%;
-      object-fit: cover; object-position: center;
+      width: 100%;
+      height: auto;
+      display: block;
       opacity: 0.35;
     }
     .about-hero__title {
       position: absolute;
       bottom: 48px;
       left: calc((100% - var(--content-width)) / 2 + var(--gap));
+      z-index: 1;
       font-family: var(--font-display);
       font-weight: 600;
       font-size: clamp(28px, 5vw, 56px);
@@ -53,6 +57,12 @@
       color: var(--red);
       line-height: 1;
       white-space: nowrap;
+    }
+
+    #about-root {
+      position: relative;
+      z-index: 1;
+      padding-top: 120px;
     }
 
     .about-section {
@@ -128,7 +138,7 @@
     gtag('config', 'G-8R7Y231MWN', { anonymize_ip: true });
   </script>
 </head>
-<body style="padding-top: 0">
+<body>
 
       <nav class="site-nav" role="navigation" aria-label="Main navigation">
     <div class="site-nav__inner">
@@ -157,8 +167,8 @@
   </nav>
 
   <!-- NAV GRADIENT FADER -->
-  <div style="position:fixed;top:0;left:0;right:0;z-index:89;pointer-events:none;">
-    <img src="images/backgrounds/yy_gradient_fader_nav_03.png" alt="" style="width:100%;height:300px;object-fit:cover;object-position:top;display:block;">
+  <div class="nav-gradient-fader">
+    <img src="images/backgrounds/yy_gradient_fader_nav_03.png" alt="">
   </div>
 
   <!-- Hero -->
