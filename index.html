@@ -38,7 +38,7 @@
     }
     .home-hero__bg {
       position: absolute;
-      top: 0; left: 0; right: 0;
+      top: -100; left: 0; right: 0;
       z-index: 0;
       pointer-events: none;
     }
@@ -46,8 +46,6 @@
       width: 100%;
       height: auto;
       display: block;
-      transform: scale(var(--hero-img-scale)) translateY(var(--hero-img-offset-y));
-      transform-origin: center top;
     }
 
     
@@ -57,7 +55,7 @@
       position: fixed;
       left: 0;
       top: calc(var(--nav-height) + 60px);
-      z-index: 5;
+      z-index: 1;
       width: 40px;
       height: 12px;
       pointer-events: none;
@@ -121,7 +119,7 @@
       vertical-align: top;
       white-space: nowrap;
     }
-    .hours-table td:not(:last-child) { padding-right: 40px; }
+    .hours-table td:not(:last-child) { padding-right: clamp(4px, 2vw, 40px); }
     .hours-table tr { height: auto; }
     .hours-table td:first-child { color: var(--gray-text); }
     .hours-table td:nth-child(2) { font-weight: 700; }
@@ -131,7 +129,7 @@
     .location-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
     .location-address {
       font-family: var(--font-body);
-      font-size: var(--fs-body-lg);
+      font-size: var(--fs-body);
       color: var(--black);
     }
     .location-address strong { display: block; font-weight: 700; margin-bottom: 4px; }
@@ -152,7 +150,7 @@
     /* ── Menue teaser ── */
     .menue-teaser p {
       font-family: var(--font-body);
-      font-size: var(--fs-body-lg);
+      font-size: var(--fs-body);
       color: var(--black);
       margin-bottom: 4px;
     }
@@ -161,7 +159,7 @@
     .about-inner { max-width: 600px; margin: 0 auto; text-align: center; }
     .about-inner p {
       font-family: var(--font-body);
-      font-size: var(--fs-body-lg);
+      font-size: var(--fs-body);
       color: var(--black);
       margin-bottom: 16px;
     }
@@ -217,7 +215,7 @@
     .jobs-list li strong {
       display: block;
       font-family: var(--font-body);
-      font-size: var(--fs-body-lg);
+      font-size: var(--fs-body);
       font-weight: 700;
       color: var(--black);
     }
@@ -237,19 +235,42 @@
 
     /* ── Responsive ── */
     @media (max-width: 900px) {
+      .home-section__title { font-size: 30px; }
+      .home-jobs .home-section__title { font-size: 30px; }
       .location-inner { grid-template-columns: 1fr; }
       .about-inner { grid-template-columns: 1fr; }
       .home-jobs__content { justify-content: flex-start; }
       .home-jobs__inner { width: 100%; }
 
-      /* Section spacing on mobile — 60+60 = 120px gap between sections */
-      .home-section__inner { padding: 60px var(--gap); }
+      .home-hero__bg {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 250vw;
+        z-index: 0;
+        pointer-events: none;
+      }
+      .home-hero__bg img {
+        width: 100%;
+        height: auto;
+        display: block;
+        transform: none;
+      }
+
+      /* Push content down on mobile, hero image stays */
+      .home-content { padding-top: calc(var(--nav-height) + 240px); }
+
+      /* Section spacing on mobile */
+      .home-section + .home-section { margin-top: 80px; }
+      /* Jobs hat padding-top: 80px → margin-top: 40px → 120px effektiv */
+      .home-jobs { margin-top: 40px; }
 
       .home-plane {
       position: fixed;
       left: 0;
-      top: calc(var(--nav-height) + 60px);
-      z-index: 5;
+      top: calc(var(--nav-height) + 100px);
+      z-index: 1;
       width: 40px;
       height: 12px;
       pointer-events: none;
@@ -258,6 +279,9 @@
     }
     }
     @media (max-width: 600px) {
+      .home-hero__bg {
+        width: 300vw;
+      }
       .home-section {
       position: relative;
       width: 100%;
@@ -265,7 +289,7 @@
     .home-section__inner {
       max-width: var(--page-width);
       margin: 0 auto;
-      padding: 60px var(--gap);
+      padding: 0 var(--gap);
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 0;
@@ -273,7 +297,7 @@
     .home-section--right .home-section__inner {
       max-width: var(--page-width);
       margin: 0 auto;
-      padding: 60px var(--gap);
+      padding: 0 var(--gap);
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 0;
@@ -290,7 +314,7 @@
       vertical-align: top;
       white-space: nowrap;
     }
-    .hours-table td:not(:last-child) { padding-right: 40px; }
+    .hours-table td:not(:last-child) { padding-right: clamp(4px, 2vw, 40px); }
     .hours-table tr { height: auto; }
     }
   </style>
@@ -409,9 +433,9 @@
           <div class="home-section__content">
             <h2 class="home-section__title">Opening Hours</h2>
             <table class="hours-table"><tbody id="hours-body">
-              <tr><td>Mon – Thu</td><td><strong>12:00 – 23:00</strong></td><td>Kitchen till 22:00</td></tr>
-              <tr><td>Fri &amp; Sat</td><td><strong>12:00 – 23:30</strong></td><td>Kitchen till 22:30</td></tr>
-              <tr><td>Sun</td><td><strong>13:00 – 22:30</strong></td><td>Kitchen till 21:30</td></tr>
+              <tr><td class="t-body">Mon – Thu</td><td class="t-body t-body--strong">12:00 – 23:00</td><td class="t-body t-body--muted">Kitchen till 22:00</td></tr>
+              <tr><td class="t-body">Fri &amp; Sat</td><td class="t-body t-body--strong">12:00 – 23:30</td><td class="t-body t-body--muted">Kitchen till 22:30</td></tr>
+              <tr><td class="t-body">Sun</td><td class="t-body t-body--strong">13:00 – 22:30</td><td class="t-body t-body--muted">Kitchen till 21:30</td></tr>
             </tbody></table>
           </div>
         </div>
@@ -422,7 +446,7 @@
         <div class="home-section__inner">
           <div class="home-section__content">
             <h2 class="home-section__title">Location</h2>
-            <div class="location-address" id="location-address">
+            <div class="location-address t-body" id="location-address">
               <strong>YAM YAM BERLIN</strong><br>
               Alte Schönhauser Straße 6<br>10119 Berlin
             </div>
@@ -439,8 +463,8 @@
         <div class="home-section__inner">
           <div class="home-section__content">
             <h2 class="home-section__title">Menue</h2>
-            <p id="menu-teaser-text">Lunch, Starters, Mains, Desserts &amp; Drinks</p>
-            <p>You'll find your choice</p>
+            <p id="menu-teaser-text" class="t-body">Lunch, Starters, Mains, Desserts &amp; Drinks</p>
+            <p class="t-body">You'll find your choice</p>
             <a href="menue.html" class="btn-outline" style="margin-top:20px">
               Read Menue <img src="images/icons/arrow.svg" alt="" class="btn-arrow" width="16" height="16">
             </a>
@@ -453,8 +477,8 @@
         <div class="home-section__inner">
           <div class="home-section__content">
             <h2 class="home-section__title">About<br>YamYam Berlin</h2>
-            <p>We started in 2009 with a clear claim: authentic, well-made, no shortcuts.</p>
-            <p>We develop all our dishes in-house, ferment ourselves, and combine traditional Korean ingredients with modern flavours. International team, contemporary cuisine.</p>
+            <p class="t-body">We started in 2009 with a clear claim: authentic, well-made, no shortcuts.</p>
+            <p class="t-body">We develop all our dishes in-house, ferment ourselves, and combine traditional Korean ingredients with modern flavours. International team, contemporary cuisine.</p>
             <a href="about.html" class="btn-outline" style="margin-top:20px">
               Read More <img src="images/icons/arrow.svg" alt="" class="btn-arrow" width="16" height="16">
             </a>
@@ -474,14 +498,14 @@
       <div class="home-jobs__inner">
         <h2 class="home-section__title">Jobs</h2>
         <ul class="jobs-list" id="home-jobs-list">
-          <li><strong>Cook/Koch*In</strong><span>Fulltime 42hr/week</span></li>
-          <li><strong>Kitchen assistant /Küchenhilfe - Beikoch*In</strong><span>Fulltime 42hr/week</span></li>
-          <li><strong>Dishwasher/Spüler*In</strong><span>Fulltime 42hr/week</span></li>
-          <li><strong>Bartender</strong><span>Fulltime 42hr/week</span></li>
-          <li><strong>Shiftleader Service/Schichtleiter*In</strong><span>Fulltime 42hr/week</span></li>
-          <li><strong>Service/ Kellner*In</strong><span>Fulltime 42hr/week</span></li>
-          <li><strong>Facility Manager*In</strong><span>Minijob</span></li>
-          <li><strong>Office Manager/ Bürohilfe</strong><span>Parttime 12hrs/week or Minijob</span></li>
+          <li><strong class="t-body t-body--strong">Cook/Koch*In</strong><span class="t-body t-body--muted">Fulltime 42hr/week</span></li>
+          <li><strong class="t-body t-body--strong">Kitchen assistant /Küchenhilfe - Beikoch*In</strong><span class="t-body t-body--muted">Fulltime 42hr/week</span></li>
+          <li><strong class="t-body t-body--strong">Dishwasher/Spüler*In</strong><span class="t-body t-body--muted">Fulltime 42hr/week</span></li>
+          <li><strong class="t-body t-body--strong">Bartender</strong><span class="t-body t-body--muted">Fulltime 42hr/week</span></li>
+          <li><strong class="t-body t-body--strong">Shiftleader Service/Schichtleiter*In</strong><span class="t-body t-body--muted">Fulltime 42hr/week</span></li>
+          <li><strong class="t-body t-body--strong">Service/ Kellner*In</strong><span class="t-body t-body--muted">Fulltime 42hr/week</span></li>
+          <li><strong class="t-body t-body--strong">Facility Manager*In</strong><span class="t-body t-body--muted">Minijob</span></li>
+          <li><strong class="t-body t-body--strong">Office Manager/ Bürohilfe</strong><span class="t-body t-body--muted">Parttime 12hrs/week or Minijob</span></li>
         </ul>
         <a href="jobs.html" class="btn-outline">
           Read More <img src="images/icons/arrow.svg" alt="" class="btn-arrow" width="16" height="16">
@@ -517,9 +541,9 @@
       if (hoursEl && data.hours.length) {
         hoursEl.innerHTML = data.hours.map(h => `
           <tr>
-            <td>${h.day}</td>
-            <td><strong>${h.time}</strong></td>
-            <td>${h.kitchen}</td>
+            <td class="t-body">${h.day}</td>
+            <td class="t-body t-body--strong">${h.time}</td>
+            <td class="t-body t-body--muted">${h.kitchen}</td>
           </tr>`).join('');
       }
 
@@ -546,8 +570,8 @@
       if (jobsEl && data.jobs.length) {
         jobsEl.innerHTML = data.jobs.map(j => `
           <li>
-            <strong>${j.title}</strong>
-            <span>${[j.employment, j.hours].filter(Boolean).join(' ')}</span>
+            <strong class="t-body t-body--strong">${j.title}</strong>
+            <span class="t-body t-body--muted">${[j.employment, j.hours].filter(Boolean).join(' ')}</span>
           </li>`).join('');
       }
     }
@@ -560,23 +584,23 @@
     const menuLink = document.querySelector('.site-nav__links--left a:first-child');
     const getParallax = () => {
       const w = window.innerWidth;
-      if (w <= 600) return 0.45;
-      if (w <= 900) return 0.32;
-      return 0.18;
+      if (w <= 600) return 0.5;     // Mobile — schneller
+      if (w <= 900) return 0.5;     // Tablet — schneller
+      return 0.18;                   // Desktop
     };
 
     const navH     = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-height')) || 100;
-    const startTop = navH + 60;
 
     function updatePlane() {
       if (!plane || !hero) return;
+      const startTop = navH + (window.innerWidth <= 900 ? 100 : 60);
       const heroH    = hero.offsetHeight;
       const scrollY  = window.scrollY;
       const progress = Math.min(Math.max(scrollY / heroH, 0), 1);
 
       // X: starts under MENUE link, flies to right
       const rect     = menuLink ? menuLink.getBoundingClientRect() : null;
-      const startXPx = rect ? rect.left : 40;
+      const startXPx = rect ? rect.left + 20 : 60;
       const startXVw = (startXPx / window.innerWidth) * 100;
       const xVw      = startXVw + (progress * (110 - startXVw));
 

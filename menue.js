@@ -127,9 +127,9 @@ function renderInfoBox(item) {
     : '';
   return `
     <div class="menu-info-box">
-      ${item.name ? `<p><strong>${item.name}</strong></p>` : ''}
-      ${item.desc_en ? `<p>${item.desc_en}</p>` : ''}
-      ${item.desc_de ? `<p>${item.desc_de}</p>` : ''}
+      ${item.name ? `<p class="t-body"><strong>${item.name}</strong></p>` : ''}
+      ${item.desc_en ? `<p class="t-body">${item.desc_en}</p>` : ''}
+      ${item.desc_de ? `<p class="t-body t-body--muted">${item.desc_de}</p>` : ''}
       ${priceHtml}
     </div>
   `;
@@ -157,7 +157,7 @@ function renderDishCard(item) {
     ? `<span class="dish-card__badge">New</span>`
     : '';
   const allergenHtml = item.allergene
-    ? `<p class="dish-card__allergene">${item.allergene}</p>`
+    ? `<p class="dish-card__allergene t-body t-body--muted">${item.allergene}</p>`
     : '';
   const priceHtml = item.preis
     ? `<span class="dish-card__price">${item.preis}</span>`
@@ -173,8 +173,8 @@ function renderDishCard(item) {
           ${zusatzHtml}
           <span class="dish-card__icons">${iconsHtml}</span>
         </div>
-        ${item.desc_en ? `<p class="dish-card__desc-en">${item.desc_en}</p>` : ''}
-        ${item.desc_de ? `<p class="dish-card__desc-de">${item.desc_de}</p>` : ''}
+        ${item.desc_en ? `<p class="t-body">${item.desc_en}</p>` : ''}
+        ${item.desc_de ? `<p class="t-body t-body--muted">${item.desc_de}</p>` : ''}
         ${allergenHtml}
         <div class="dish-card__footer">
           ${priceHtml}
@@ -191,21 +191,21 @@ function renderDrinkRow(item) {
 
   const nameLabel = item.id ? `${item.name}` : item.name;
   const descHtml = item.desc_en
-    ? `<span class="drink-row__desc">${item.desc_en}${item.desc_de ? ` · ${item.desc_de}` : ''}</span>`
+    ? `<span class="drink-row__desc t-body t-body--muted">${item.desc_en}${item.desc_de ? ` · ${item.desc_de}` : ''}</span>`
     : '';
   const allergenHtml = item.allergene
-    ? `<span class="drink-row__desc" style="color:var(--gray-mid);font-size:10px">${item.allergene}</span>`
+    ? `<span class="drink-row__allergene t-body t-body--muted">${item.allergene}</span>`
     : '';
 
   return `
     <div class="drink-row">
-      <div class="drink-row__name">
+      <div class="drink-row__name t-body t-body--strong">
         ${nameLabel}
         ${iconsHtml}
         ${descHtml}
         ${allergenHtml}
       </div>
-      <span class="drink-row__volume">${item.zusatz || ''}</span>
+      <span class="drink-row__volume t-body t-body--muted">${item.zusatz || ''}</span>
       <span class="drink-row__price">${item.preis || ''}</span>
     </div>
   `;

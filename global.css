@@ -78,8 +78,8 @@
   --space-xl:  120px;
 
   --fs-small:   11px;
+  --fs-caption: 11px;
   --fs-body:    14px;
-  --fs-body-lg: 16px;
   --fs-nav:     28px;
 
   --hero-img-scale:    1;
@@ -131,11 +131,20 @@ p { line-height: 1.4; }
 .t-display--lg { font-size: clamp(28px, 4vw, 48px); line-height: 1; }
 .t-display--md { font-size: clamp(20px, 2.5vw, 30px); line-height: 1; }
 .t-display--sm { font-size: clamp(16px, 1.8vw, 22px); line-height: 1.1; }
-.t-body-strong { font-family: var(--font-body); font-weight: 700; font-size: 14px; line-height: 1.5; }
-.t-body        { font-family: var(--font-body); font-weight: 400; font-size: 14px; line-height: 1.4; color: var(--black); }
-.t-small       { font-family: var(--font-body); font-weight: 400; font-size: 11px; line-height: 1.4; color: var(--beige-md); letter-spacing: 0.04em; text-transform: uppercase; }
-.t-accent      { font-family: var(--font-accent); font-style: italic; font-size: 13px; color: var(--beige-md); }
-.t-price       { font-family: var(--font-accent); font-size: 14px; font-weight: 400; color: var(--beige-md); }
+.t-body {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--black);
+}
+.t-body--muted { color: var(--beige-md); }
+.t-body--strong { font-weight: 700; }
+.t-body--accent {
+  font-family: var(--font-accent);
+  font-style: italic;
+  color: var(--red);
+}
 
 .price-pill {
   display: inline-block; padding: 3px 10px;
@@ -278,6 +287,19 @@ p { line-height: 1.4; }
     --gap: 16px;
     --hero-img-scale: 1.5;
     --hero-img-offset-y: 60px;
+    --fs-body: 18px;
+  }
+
+  /* Alle Display-Headlines auf Mobile gleich groß */
+  h1, h2, h3, h4, h5, h6,
+  .t-display,
+  .home-section__title,
+  .about-section__title,
+  .about-hero__title,
+  .about-slideshow__caption h3,
+  .menu-section__title,
+  .menu-subcategory-title {
+    font-size: 36px;
   }
 
   .site-nav__inner {
@@ -336,9 +358,14 @@ p { line-height: 1.4; }
   .mobile-only { display: list-item; }
 
   /* Home sections — alternating side alignment on mobile */
-  .home-section.home-section--location .home-section__content,
-  .home-section.home-section--about .home-section__content {
+  .home-section.home-section--location .home-section__content {
     grid-column: 2;
+    text-align: right;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .home-section.home-section--about .home-section__content {
+    grid-column: 1 / -1;
     text-align: right;
     padding-left: 0;
     padding-right: 0;
@@ -525,6 +552,6 @@ p { line-height: 1.4; }
 }
 .about-slideshow__caption p {
   font-family: var(--font-body);
-  font-size: var(--fs-body-lg);
+  font-size: var(--fs-body);
   color: var(--black);
 }

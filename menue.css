@@ -20,7 +20,7 @@
   margin: 0 auto;
   padding: 0 var(--gap);
   display: flex;
-  gap: 24px;
+  gap: clamp(16px, 2.5vw, 24px);
   align-items: center;
   overflow-x: auto;
   scrollbar-width: none;
@@ -85,10 +85,6 @@
   padding-bottom: 12px;
 }
 .menu-section__subtitle {
-  font-family: var(--font-accent);
-  font-style: italic;
-  font-size: 13px;
-  color: var(--beige-md);
   margin-top: 6px;
 }
 
@@ -99,12 +95,7 @@
   margin-bottom: var(--space-md);
   border-left: 3px solid var(--red);
 }
-.menu-info-box p {
-  font-size: 14px;
-  line-height: 1.6;
-  color: var(--black);
-}
-.menu-info-box p + p { margin-top: 6px; color: var(--beige-md); }
+.menu-info-box p + p { margin-top: 6px; }
 .menu-info-box .price-pill { margin-top: 12px; }
 
 /* --- Dish Card Grid ---------------------------------------- */
@@ -183,7 +174,7 @@
 .dish-card__zusatz {
   font-family: var(--font-body);
   font-weight: 400;
-  font-size: 10px;
+  font-size: var(--fs-caption);
   letter-spacing: 0.4px;
   color: var(--black);
   text-transform: uppercase;
@@ -191,25 +182,8 @@
 }
 .dish-card__icons { display: flex; gap: 4px; margin-left: auto; }
 
-.dish-card__desc-en {
-  font-family: var(--font-body);
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 1.5;
-  color: var(--black);
-}
-.dish-card__desc-de {
-  font-family: var(--font-body);
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 1.4;
-  color: var(--beige-md);
-}
 .dish-card__allergene {
-  font-family: var(--font-body);
-  font-weight: 400;
-  font-size: 8px;
-  color: var(--black);
+  font-size: var(--fs-caption);
   text-transform: uppercase;
 }
 .dish-card__footer {
@@ -224,7 +198,7 @@
   font-weight: 500;
   font-size: 16px;
   letter-spacing: 0.64px;
-  color: var(--black);
+  color: var(--red);
 }
 
 /* --- Drink List Layout ------------------------------------- */
@@ -243,10 +217,6 @@
 .drink-row:last-child { border-bottom: none; }
 
 .drink-row__name {
-  font-family: var(--font-body);
-  font-weight: 700;
-  font-size: 13px;
-  color: var(--black);
   text-transform: uppercase;
   letter-spacing: 0.04em;
   display: flex;
@@ -254,27 +224,24 @@
   gap: 8px;
 }
 .drink-row__desc {
-  font-size: 12px;
-  color: var(--beige-md);
-  font-weight: 400;
-  text-transform: none;
-  letter-spacing: 0;
   display: block;
   margin-top: 2px;
 }
 .drink-row__volume {
-  font-size: 12px;
-  color: var(--beige-md);
   white-space: nowrap;
   text-align: right;
 }
 .drink-row__price {
-  font-family: var(--font-accent);
-  font-size: 14px;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 16px;
   color: var(--red);
   white-space: nowrap;
   text-align: right;
   min-width: 60px;
+}
+.drink-row__allergene {
+  font-size: var(--fs-caption);
 }
 
 /* Sub-headers within sections (e.g. Steamed / Fried, drink groups) */
@@ -295,30 +262,6 @@
 .drink-row--premium {
   grid-template-columns: 120px 1fr auto auto;
 }
-.drink-row__type {
-  font-family: var(--font-display);
-  font-size: 13px;
-  color: var(--black);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-/* --- Extras table ------------------------------------------ */
-.extras-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 8px 24px;
-}
-.extras-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 8px 0;
-  border-bottom: 1px solid var(--gray-light);
-  font-size: 13px;
-}
-.extras-row__name { font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; }
-.extras-row__price { font-family: var(--font-accent); color: var(--red); }
 
 /* --- Responsive -------------------------------------------- */
 @media (max-width: 1024px) {
@@ -326,9 +269,8 @@
   .drink-row { grid-template-columns: 1fr auto; }
   .drink-row__volume { display: none; }
   .drink-row--premium { grid-template-columns: 1fr auto; }
-  .drink-row__type { grid-column: 1; }
 }
 @media (max-width: 767px) {
   .menu-grid { grid-template-columns: 1fr; }
-  .menu-nav__btn { font-size: 15px; padding: 12px 14px; }
+  .menu-nav__btn { font-size: 18px; padding: 12px 14px; }
 }

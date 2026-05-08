@@ -72,8 +72,6 @@
       margin-bottom: 4px;
     }
     .legal-p {
-      font-family: var(--font-body);
-      font-size: var(--fs-body);
       color: var(--gray-text);
       margin-bottom: 12px;
     }
@@ -167,7 +165,7 @@
         }
         if (row.h2) html += `<h3 class="legal-h3">${row.h2}</h3>`;
         if (row.strong) html += `<span class="legal-strong">${row.strong}</span>`;
-        if (row.p) html += `<p class="legal-p">${row.p.replace(/\n/g, '<br>')}</p>`;
+        if (row.p) html += `<p class="legal-p t-body">${row.p.replace(/\n/g, '<br>')}</p>`;
       }
       root.innerHTML = html;
     }

@@ -81,7 +81,7 @@
     }
     .about-section p {
       font-family: var(--font-body);
-      font-size: var(--fs-body-lg);
+      font-size: var(--fs-body);
       color: var(--black);
       margin-bottom: 16px;
       max-width: var(--page-width);
@@ -220,14 +220,14 @@
       const captionHtml = impressionsIdx > -1 ? `
           <div class="about-slideshow__caption">
             <h3>${sections[impressionsIdx].headline}</h3>
-            ${sections[impressionsIdx].text.split('\n\n').map(p => `<p>${p.replace(/\n/g, '<br>')}</p>`).join('')}
+            ${sections[impressionsIdx].text.split('\n\n').map(p => `<p class="t-body">${p.replace(/\n/g, '<br>')}</p>`).join('')}
           </div>` : '';
       sections.forEach((sec, i) => {
         if (i === 0) {
           root.innerHTML += `<section class="about-section">
             <h2 class="about-section__title">${sec.headline}</h2>
             <div style="max-width:640px">
-              ${sec.text.split('\n\n').map(p => `<p>${p}</p>`).join('')}
+              ${sec.text.split('\n\n').map(p => `<p class="t-body">${p}</p>`).join('')}
             </div>
           </section>
           <section class="about-slideshow" aria-label="Yam Yam Berlin Impressionen">
@@ -246,7 +246,7 @@
             <div class="about-team__content">
               <div>
                 <h2 class="about-section__title">${sec.headline}</h2>
-                ${sec.text.split('\n\n').map(p => `<p>${p}</p>`).join('')}
+                ${sec.text.split('\n\n').map(p => `<p class="t-body">${p}</p>`).join('')}
                 ${sec.cta ? `<a href="jobs.html" class="btn-outline" style="margin-top:20px">${sec.cta} <img src="images/icons/arrow.svg" alt="" class="btn-arrow" width="16" height="16"></a>` : ''}
               </div>
               <div class="about-team__img">
@@ -258,7 +258,7 @@
         }
         root.innerHTML += `<section class="about-section">
           <h2 class="about-section__title">${sec.headline}</h2>
-          ${sec.text.split('\n\n').map(p => `<p>${p}</p>`).join('')}
+          ${sec.text.split('\n\n').map(p => `<p class="t-body">${p}</p>`).join('')}
           ${sec.cta ? `<a href="jobs.html" class="btn-outline">${sec.cta} <img src="images/icons/arrow.svg" alt="" class="btn-arrow" width="16" height="16"></a>` : ''}
         </section>`;
       });
