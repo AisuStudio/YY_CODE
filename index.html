@@ -38,7 +38,7 @@
     }
     .home-hero__bg {
       position: absolute;
-      top: -100; left: 0; right: 0;
+      top: var(--hero-img-offset-y); left: 0; right: 0;
       z-index: 0;
       pointer-events: none;
     }
@@ -46,6 +46,8 @@
       width: 100%;
       height: auto;
       display: block;
+      transform: scale(var(--hero-img-scale));
+      transform-origin: center top;
     }
 
     
@@ -67,7 +69,7 @@
     .home-content {
       position: relative;
       z-index: 3;
-      padding-top: var(--nav-height);
+      padding-top: calc(var(--nav-height) + 100px);
     }
 
     /* ── Section base ── */
@@ -179,11 +181,16 @@
       overflow: hidden;
     }
     .home-jobs__bg img {
-      position: fixed;
+      position: absolute;
+      inset: 0;
       width: 100%;
-      height: auto;
+      height: 100%;
+      object-fit: cover;
+      object-position: var(--jobs-img-offset-x) center;
       display: block;
-      opacity: 0.35;
+      transform: scale(var(--jobs-img-scale));
+      transform-origin: center;
+      opacity: 0.67;
     }
     .home-jobs__content {
       position: relative;
@@ -389,14 +396,16 @@
   <!-- NAV -->
       <nav class="site-nav" role="navigation" aria-label="Main navigation">
     <div class="site-nav__inner">
+      <a href="index.html" class="site-nav__logo" aria-label="YamYam Berlin Home">
+        <img src="images/logos/YY_Logo_Red.svg" alt="YamYam Berlin">
+      </a>
+      <div class="site-nav__menu">
       <ul class="site-nav__links site-nav__links--left" role="list">
+        <li class="mobile-only"><a href="index.html" class="active">Home</a></li>
         <li><a href="menue.html">Menue</a></li>
         <li><a href="about.html">About</a></li>
         <li><a href="jobs.html">Jobs</a></li>
       </ul>
-      <a href="index.html" class="site-nav__logo" aria-label="YamYam Berlin Home">
-        <img src="images/logos/YY_Logo_Red.svg" alt="YamYam Berlin">
-      </a>
       <ul class="site-nav__links site-nav__links--right" role="list">
         <li><a href="https://app.resmio.com/yamyam-berlin/widget" target="_blank" rel="noopener">Reserve</a></li>
         <li><a href="https://wolt.com/en/deu/berlin/restaurant/yamyam" target="_blank" rel="noopener">Order Online</a></li>
@@ -407,6 +416,7 @@
           </a>
         </li>
       </ul>
+      </div>
       <button class="site-nav__burger" aria-label="Menu öffnen" aria-expanded="false">
         <img src="images/icons/burger.png" alt="">
       </button>
@@ -586,7 +596,7 @@
       const w = window.innerWidth;
       if (w <= 600) return 0.5;     // Mobile — schneller
       if (w <= 900) return 0.5;     // Tablet — schneller
-      return 0.18;                   // Desktop
+      return 0.25;                   // Desktop
     };
 
     const navH     = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-height')) || 100;
@@ -621,12 +631,10 @@
 
     // Mobile burger nav
     const burger = document.querySelector('.site-nav__burger');
-    const navLeft  = document.querySelector('.site-nav__links--left');
-    const navRight = document.querySelector('.site-nav__links--right');
+    const navMenu = document.querySelector('.site-nav__menu');
     if (burger) {
       burger.addEventListener('click', function() {
-        const open = navLeft.classList.toggle('open');
-        navRight.classList.toggle('open');
+        const open = navMenu.classList.toggle('open');
         this.setAttribute('aria-expanded', open ? 'true' : 'false');
       });
     }
