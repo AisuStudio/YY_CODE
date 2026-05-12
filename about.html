@@ -25,14 +25,14 @@
   <meta name="twitter:image" content="https://yamyam-berlin.de/images/backgrounds/yy_about_venue.jpg">
   <link rel="stylesheet" href="global.css">
   <style>
-    body { margin: 0; overflow-x: hidden; padding-top: var(--nav-height); }
+    body { margin: 0; overflow-x: clip; padding-top: var(--nav-height); }
 
     .about-hero {
       position: absolute;
       top: 0;
       left: 0;
       right: 0;
-      height: 600px;
+      height: 800px;
       z-index: 0;
       pointer-events: none;
       overflow: hidden;
@@ -89,7 +89,7 @@
     .about-team__bg img {
       width: 100%; height: 100%;
       object-fit: cover; object-position: center;
-      opacity: 0.15;
+      opacity: 0.35;
     }
     .about-team__content {
       position: relative; z-index: 1;
@@ -110,6 +110,32 @@
     .about-impressions img {
       width: 100%; max-width: var(--page-width);
       display: block; margin-bottom: 24px;
+    }
+
+    @media (min-width: 901px) {
+      /* Anchor bottom (street + guests) so cover crops the top instead */
+      .about-hero__bg img { object-position: center bottom; }
+      /* Team BG: content-driven section, image overflows above (under caption) + below into footer.
+         72 padding-bottom + 60 margin-bottom + 20 footer padding-top = 152 (matches Impressions→Team) */
+      .about-team {
+        min-height: auto;
+        overflow: visible;
+        margin-bottom: 60px;
+      }
+      .about-team__bg {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: visible;
+      }
+      .about-team__bg img {
+        width: 100%;
+        height: auto;
+        object-fit: unset;
+        display: block;
+        transform: scale(1.15);           /* ← Zoom-Faktor */
+        transform-origin: center;
+      }
     }
 
     @media (max-width: 900px) {

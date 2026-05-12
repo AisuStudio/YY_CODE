@@ -3,8 +3,9 @@
    Menu page: category nav, dish cards, drink list, grid
    ============================================================ */
 
-/* Override: gradient fader extends past sub-nav on menue page */
-.nav-gradient-fader img { height: 200px; }
+/* Menue page has no BG image — give site nav a solid bg so content doesn't show through */
+.site-nav { background: var(--bg); }
+.menu-nav { z-index: 50; }
 
 /* --- Category Nav (sticky sub-nav) ------------------------- */
 .menu-nav {

@@ -241,6 +241,14 @@
     
 
     /* ── Responsive ── */
+    /* Hero image cap — above 1500px viewport, image stays at 1500px wide so the built-in bottom gradient stays in frame */
+    @media (min-width: 1500px) {
+      .home-hero__bg img {
+        width: 1500px;
+        margin: 0 auto;
+      }
+    }
+
     @media (max-width: 900px) {
       .home-section__title { font-size: 30px; }
       .home-jobs .home-section__title { font-size: 30px; }
@@ -591,7 +599,7 @@
     // Plane scroll animation — parallax
     const plane    = document.querySelector('.home-plane');
     const hero     = document.querySelector('.home-hero');
-    const menuLink = document.querySelector('.site-nav__links--left a:first-child');
+    const menuLink = document.querySelector('.site-nav__links--left a[href="menue.html"]');
     const getParallax = () => {
       const w = window.innerWidth;
       if (w <= 600) return 0.5;     // Mobile — schneller

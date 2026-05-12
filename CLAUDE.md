@@ -54,6 +54,13 @@ fonts/
 - Button hover: schwarz (Rahmen + Text + Pfeil), kein Übergang, transparent BG
 - Border-radius: 8px auf Buttons, 8px auf Price-Pills
 
+## Mobile vs Desktop — Scope-Regel (WICHTIG)
+- **Mobile-Anpassungen leben ausschließlich in `@media (max-width: 900px)` Blocks** (bzw. `max-width: 600px` für kleinere Breakpoints).
+- **Desktop-Anpassungen leben ausschließlich in `@media (min-width: 901px)` Blocks** oder in den Basis-Regeln (außerhalb von Media Queries).
+- **Basis-Regeln (ohne Media Query) NIEMALS ändern, um Mobile zu fixen** — das beeinflusst zwangsläufig Desktop. Stattdessen Override im passenden Mobile-Block.
+- Bei jedem User-Prompt zu Layout/Styling: **vor der Änderung** explizit fragen oder festhalten, welcher Viewport gemeint ist.
+- Wenn unklar: vor dem Edit auflisten, welche bestehenden Regeln betroffen sind und was sich an Desktop ändern würde.
+
 ## Nav Struktur (alle Seiten identisch)
 - position: fixed, background: var(--bg)
 - Grid: 1fr auto 1fr — Logo zentriert
