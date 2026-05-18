@@ -15,3 +15,7 @@ Backup/
 Stickerbogen/
 aboutski/
 _archive/
+
+# Local-only reports
+report.md
+fuckup_report.md
