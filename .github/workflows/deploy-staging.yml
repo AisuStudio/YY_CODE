@@ -25,7 +25,7 @@ jobs:
           server: wp1151551.server-he.de
           username: ftp1151551-yy
           password: ${{ secrets.FTP_PASSWORD_STAGING }}
-          protocol: ftp
+          protocol: ftps
           port: 21
           server-dir: ./
           local-dir: ./
