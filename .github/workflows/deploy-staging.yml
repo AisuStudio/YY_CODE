@@ -27,6 +27,7 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD_STAGING }}
           protocol: ftps
           port: 21
+          security: loose
           server-dir: ./
           local-dir: ./
           exclude: |
