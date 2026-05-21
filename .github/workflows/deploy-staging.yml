@@ -1,0 +1,41 @@
+name: Deploy to Staging (yy.yamyam-berlin.de)
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Override robots.txt for staging
+        run: |
+          cat > robots.txt << 'ROBOTS'
+          User-agent: *
+          Disallow: /
+          ROBOTS
+
+      - name: FTP Deploy to HostEurope
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: wp1151551.server-he.de
+          username: ftp1151551-yy
+          password: ${{ secrets.FTP_PASSWORD_STAGING }}
+          protocol: ftp
+          port: 21
+          server-dir: ./
+          local-dir: ./
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/.github/**
+            **/node_modules/**
+            **/.vscode/**
+            **/.DS_Store
+            **/_archive/**
+            README.md
+            CLAUDE.md

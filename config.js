@@ -5,7 +5,7 @@
 
 const YY_CONFIG = {
   SHEET_ID: '1np-pFIEK8PD8OdEOArdllTTmqnhBj2Pf4ELICj1PXMU',
-  API_KEY:  'AIzaSyB4AzCvPNmzaksMLPL5zpJcRX6czyQcyK8',
+  API_KEY:  'AIzaSyBvBa8QqxTPDxONLFPkd8BV6aKcrpBgeGE',
 
   TABS: {
     MENU:        'Menue',

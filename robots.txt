@@ -1,4 +1,6 @@
+cat > robots.txt << 'EOF'
 User-agent: *
 Allow: /
 
 Sitemap: https://yamyam-berlin.de/sitemap.xml
+EOF
