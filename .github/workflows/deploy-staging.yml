@@ -19,24 +19,31 @@ jobs:
           Disallow: /
           ROBOTS
 
-      - name: FTP Deploy to HostEurope
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: wp1151551.server-he.de
-          username: ftp1151551-yy
-          password: ${{ secrets.FTP_PASSWORD_STAGING }}
-          protocol: ftps
-          port: 21
-          security: loose
-          server-dir: ./
-          local-dir: ./
-          exclude: |
-            **/.git*
-            **/.git*/**
-            **/.github/**
-            **/node_modules/**
-            **/.vscode/**
-            **/.DS_Store
-            **/_archive/**
-            README.md
-            CLAUDE.md
+      - name: Install lftp
+        run: sudo apt-get update && sudo apt-get install -y lftp
+
+      - name: Deploy via lftp to HostEurope
+        env:
+          FTP_HOST: wp1151551.server-he.de
+          FTP_USER: ftp1151551-yy
+          FTP_PASS: ${{ secrets.FTP_PASSWORD_STAGING }}
+        run: |
+          lftp -c "
+          set ssl:verify-certificate no;
+          set ftp:ssl-protect-data true;
+          set ftp:ssl-force true;
+          set ftp:passive-mode true;
+          set net:max-retries 3;
+          set net:reconnect-interval-base 5;
+          open -u $FTP_USER,$FTP_PASS $FTP_HOST;
+          mirror -R --verbose --delete \
+            --exclude-glob .git* \
+            --exclude-glob .github/ \
+            --exclude-glob node_modules/ \
+            --exclude-glob .vscode/ \
+            --exclude-glob .DS_Store \
+            --exclude-glob _archive/ \
+            --exclude-glob README.md \
+            --exclude-glob CLAUDE.md \
+            ./ /
+          "
