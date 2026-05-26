@@ -1,0 +1,64 @@
+<!--
+  YAM YAM BERLIN — Cookie-Banner Snippet
+  Wird per cookie-banner.js dynamisch ins DOM injiziert.
+  Diese Datei dient als Referenz / kann bei Bedarf manuell eingebunden werden.
+-->
+
+<!-- Banner -->
+<div class="yy-cb" id="yy-cb" role="region" aria-label="Cookie-Hinweis" hidden>
+  <button class="yy-cb__lang" id="yy-cb-lang" type="button" aria-label="Sprache wechseln">
+    <span data-lang="de" class="is-active">DE</span>
+    <span class="yy-cb__lang-sep">|</span>
+    <span data-lang="en">EN</span>
+  </button>
+
+  <p class="yy-cb__text t-body" data-i18n="banner.text"></p>
+
+  <div class="yy-cb__actions">
+    <button type="button" class="btn-outline yy-cb__btn" data-action="accept-all" data-i18n="banner.acceptAll"></button>
+    <button type="button" class="btn-outline yy-cb__btn" data-action="reject" data-i18n="banner.reject"></button>
+    <button type="button" class="btn-outline yy-cb__btn" data-action="settings" data-i18n="banner.settings"></button>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="yy-cb-modal" id="yy-cb-modal" role="dialog" aria-modal="true" aria-labelledby="yy-cb-modal-title" hidden>
+  <div class="yy-cb-modal__overlay" data-action="close-modal"></div>
+  <div class="yy-cb-modal__box">
+    <button class="yy-cb__lang" id="yy-cb-modal-lang" type="button" aria-label="Sprache wechseln">
+      <span data-lang="de" class="is-active">DE</span>
+      <span class="yy-cb__lang-sep">|</span>
+      <span data-lang="en">EN</span>
+    </button>
+
+    <h2 id="yy-cb-modal-title" class="t-display t-display--md" data-i18n="modal.title"></h2>
+    <p class="yy-cb-modal__intro t-body" data-i18n="modal.intro"></p>
+
+    <div class="yy-cb-cat">
+      <div class="yy-cb-cat__row">
+        <h3 class="yy-cb-cat__title t-body t-body--strong" data-i18n="modal.necessary.title"></h3>
+        <label class="yy-cb-switch" aria-label="Notwendig (immer aktiv)">
+          <input type="checkbox" checked disabled data-category="necessary">
+          <span class="yy-cb-switch__track"></span>
+        </label>
+      </div>
+      <p class="yy-cb-cat__desc t-body" data-i18n="modal.necessary.desc"></p>
+    </div>
+
+    <div class="yy-cb-cat">
+      <div class="yy-cb-cat__row">
+        <h3 class="yy-cb-cat__title t-body t-body--strong" data-i18n="modal.statistics.title"></h3>
+        <label class="yy-cb-switch">
+          <input type="checkbox" data-category="statistics" id="yy-cb-cat-statistics">
+          <span class="yy-cb-switch__track"></span>
+        </label>
+      </div>
+      <p class="yy-cb-cat__desc t-body" data-i18n="modal.statistics.desc"></p>
+    </div>
+
+    <div class="yy-cb-modal__actions">
+      <button type="button" class="btn-outline yy-cb__btn" data-action="save" data-i18n="modal.save"></button>
+      <button type="button" class="btn-outline yy-cb__btn" data-action="accept-all" data-i18n="modal.acceptAll"></button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,236 @@
+/* ============================================================
+   YAM YAM BERLIN — cookie-banner.css
+   Nutzt CSS-Variablen aus global.css (--bg, --red, --black,
+   --font-body, --font-display, --beige-md, --gray-light).
+   ============================================================ */
+
+/* --- Banner ------------------------------------------------- */
+.yy-cb {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 9000;
+  width: calc(100vw - 40px);
+  max-width: 420px;
+  padding: 20px 22px 18px;
+  background: var(--bg);
+  border-radius: 10px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18), 0 2px 6px rgba(0, 0, 0, 0.08);
+  font-family: var(--font-body);
+  color: var(--black);
+  animation: yy-cb-in 0.22s ease-out;
+}
+
+@keyframes yy-cb-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.yy-cb[hidden] { display: none; }
+
+.yy-cb__text {
+  margin: 4px 0 16px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.yy-cb__text a {
+  color: var(--red);
+  font-family: var(--font-accent);
+  font-style: italic;
+  text-decoration: none;
+}
+.yy-cb__text a:hover { color: var(--black); }
+
+.yy-cb__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.yy-cb__btn {
+  font-size: 14px;
+  padding: 6px 14px;
+}
+
+/* --- Language toggle (banner + modal) ----------------------- */
+.yy-cb__lang {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  display: inline-flex;
+  gap: 4px;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--beige-md);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  text-transform: uppercase;
+}
+.yy-cb__lang span[data-lang] {
+  transition: color 0.15s;
+}
+.yy-cb__lang span[data-lang].is-active {
+  color: var(--red);
+}
+.yy-cb__lang:hover span[data-lang]:not(.is-active) {
+  color: var(--black);
+}
+.yy-cb__lang-sep {
+  color: var(--gray-light);
+}
+
+/* --- Modal -------------------------------------------------- */
+.yy-cb-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.yy-cb-modal[hidden] { display: none; }
+
+.yy-cb-modal__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.yy-cb-modal__box {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+  padding: 28px 28px 24px;
+  background: var(--bg);
+  border-radius: 10px;
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.28);
+  font-family: var(--font-body);
+  color: var(--black);
+  animation: yy-cb-in 0.22s ease-out;
+}
+
+.yy-cb-modal__box > h2 {
+  margin: 4px 0 12px;
+}
+
+.yy-cb-modal__intro {
+  margin-bottom: 20px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.yy-cb-modal__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+/* --- Category rows ----------------------------------------- */
+.yy-cb-cat {
+  padding: 14px 0;
+  border-top: 1px solid var(--gray-light);
+}
+.yy-cb-cat:last-of-type {
+  border-bottom: 1px solid var(--gray-light);
+  margin-bottom: 20px;
+}
+
+.yy-cb-cat__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 6px;
+}
+
+.yy-cb-cat__title {
+  font-size: 15px;
+  margin: 0;
+}
+
+.yy-cb-cat__desc {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--beige-md);
+  margin: 0;
+}
+
+/* --- Switch (checkbox styled as toggle) -------------------- */
+.yy-cb-switch {
+  position: relative;
+  display: inline-block;
+  width: 38px;
+  height: 22px;
+  flex-shrink: 0;
+}
+.yy-cb-switch input {
+  position: absolute;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  cursor: pointer;
+}
+.yy-cb-switch input:disabled {
+  cursor: not-allowed;
+}
+.yy-cb-switch__track {
+  position: absolute;
+  inset: 0;
+  background: var(--gray-light);
+  border-radius: 22px;
+  transition: background 0.15s;
+}
+.yy-cb-switch__track::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 18px;
+  height: 18px;
+  background: var(--white);
+  border-radius: 50%;
+  transition: transform 0.15s;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+.yy-cb-switch input:checked + .yy-cb-switch__track {
+  background: var(--red);
+}
+.yy-cb-switch input:checked + .yy-cb-switch__track::after {
+  transform: translateX(16px);
+}
+.yy-cb-switch input:disabled + .yy-cb-switch__track {
+  opacity: 0.6;
+}
+.yy-cb-switch input:focus-visible + .yy-cb-switch__track {
+  outline: 2px solid var(--red);
+  outline-offset: 2px;
+}
+
+/* --- Mobile ------------------------------------------------- */
+@media (max-width: 600px) {
+  .yy-cb {
+    right: 16px;
+    left: 16px;
+    bottom: 16px;
+    width: auto;
+    max-width: none;
+    padding: 18px 18px 16px;
+  }
+  .yy-cb__actions { flex-direction: column; }
+  .yy-cb__btn { width: 100%; justify-content: center; text-align: center; }
+
+  .yy-cb-modal { padding: 16px; }
+  .yy-cb-modal__box { padding: 24px 20px 20px; }
+  .yy-cb-modal__actions { flex-direction: column; }
+  .yy-cb-modal__actions .yy-cb__btn { width: 100%; justify-content: center; }
+}
