@@ -12,8 +12,9 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Patch config.js for staging tab
-        run: sed -i "s/MENU:[[:space:]]*'Menue'/MENU: 'Menue_Staging'/" config.js
+      - - name: Patch config.js for staging tab
+        run: |
+          sed -i "s/MENU:[[:space:]]*'Menue'/MENU: 'Menue_Staging'/" config.js
 
       - name: Override robots.txt for staging
         run: |
