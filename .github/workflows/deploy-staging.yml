@@ -12,7 +12,7 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - - name: Patch config.js for staging tab
+      - name: Patch config.js for staging tab
         run: |
           sed -i "s/MENU:[[:space:]]*'Menue'/MENU: 'Menue_Staging'/" config.js
 
