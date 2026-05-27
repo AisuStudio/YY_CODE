@@ -24,6 +24,7 @@ const YYSheets = (() => {
       const item = {
         _order: seen.size,
         kategorie: (row[C.KATEGORIE] || '').trim(),
+        subheader: (row[C.SUBHEADER] || '').trim(),
         id:        (row[C.ID]        || '').trim(),
         name:      (row[C.NAME]      || '').trim(),
         zusatz:    (row[C.ZUSATZ]    || '').trim(),
@@ -31,6 +32,8 @@ const YYSheets = (() => {
         desc_en:   (row[C.DESC_EN]   || '').trim(),
         allergene: (row[C.ALLERGENE] || '').trim(),
         preis:     (row[C.PREIS]     || '').trim(),
+        zusatz_2:  (row[C.ZUSATZ_2]  || '').trim(),
+        preis_2:   (row[C.PREIS_2]   || '').trim(),
         img:       (row[C.IMG]       || '').trim(),
         alt:       (row[C.ALT]       || '').trim(),
       };
@@ -47,8 +50,10 @@ const YYSheets = (() => {
       );
       const subGroups = {};
       for (const item of catItems) {
-        if (!subGroups[item.kategorie]) subGroups[item.kategorie] = [];
-        subGroups[item.kategorie].push(item);
+        // Group by subheader; items without subheader go into a default group keyed by kategorie
+        const groupKey = item.subheader || item.kategorie;
+        if (!subGroups[groupKey]) subGroups[groupKey] = [];
+        subGroups[groupKey].push(item);
       }
       Object.values(subGroups).forEach(arr => arr.sort((a, b) => a._order - b._order));
       return { ...cat, subGroups, items: catItems };

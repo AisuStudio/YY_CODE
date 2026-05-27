@@ -85,8 +85,9 @@ function renderSection(cat) {
 
   const content = subGroupKeys.map(key => {
     const items = cat.subGroups[key];
-    const infoItems = items.filter(i => YY_CONFIG.INFO_TYPES.includes(i.kategorie));
-    const dishItems = items.filter(i => !YY_CONFIG.INFO_TYPES.includes(i.kategorie));
+    const heroItems = items.filter(i => i.id && i.id.toUpperCase() === 'HERO');
+    const infoItems = items.filter(i => !i.id || i.id.length === 0);
+    const dishItems = items.filter(i => i.id && i.id.length > 0 && i.id.toUpperCase() !== 'HERO');
 
     const infoHtml = infoItems.map(renderInfoBox).join('');
 
@@ -96,18 +97,26 @@ function renderSection(cat) {
         ? `<div class="drink-list">${dishItems.map(renderDrinkRow).join('')}</div>`
         : '';
     } else {
+      const firstKategorie = items[0]?.kategorie || '';
+      const isCompact = cat.compactCategories && cat.compactCategories.includes(firstKategorie);
+      const gridClass = isCompact ? 'menu-grid menu-grid--compact' : 'menu-grid';
       dishHtml = dishItems.length
-        ? `<div class="menu-grid">${dishItems.map(renderDishCard).join('')}</div>`
+        ? `<div class="${gridClass}">${dishItems.map(renderDishCard).join('')}</div>`
         : '';
     }
 
-    // Sub-section header (only if more than one subgroup)
-    const showSubHeader = Object.keys(cat.subGroups).length > 1;
-    const subHeader = showSubHeader && dishItems.length
+    // Subheader appears when:
+    //   (a) Sheet's subheader column is filled, OR
+    //   (b) the parent nav-section groups multiple kategorien together
+    const hasExplicitSubheader = items.some(i => i.subheader && i.subheader.length > 0);
+    const hasMultipleKategorien = subGroupKeys.length > 1;
+    const showSubHeader = hasExplicitSubheader || hasMultipleKategorien;
+    const subHeader = showSubHeader
       ? `<h3 class="menu-subcategory-title">${formatSubGroupLabel(key)}</h3>`
       : '';
 
-    return `${infoHtml}${subHeader}${dishHtml}`;
+    const heroHtml = heroItems.map(renderHeroBox).join('');
+    return `${subHeader}${heroHtml}${infoHtml}${dishHtml}`;
   }).join('');
 
   return `
@@ -135,6 +144,25 @@ function renderInfoBox(item) {
   `;
 }
 
+/* ---- Hero Box (intro with image) -------------------------- */
+function renderHeroBox(item) {
+  const imgSrc = YY_CONFIG.getImgSrc(item.img);
+  const imgHtml = imgSrc
+    ? `<img src="${imgSrc}" alt="${item.alt || item.name + ' – Yam Yam Berlin'}" loading="lazy" onerror="this.style.display='none'">`
+    : '';
+
+  return `
+    <div class="menu-hero-box">
+      ${imgHtml ? `<div class="menu-hero-box__img">${imgHtml}</div>` : ''}
+      <div class="menu-hero-box__body">
+        ${item.name ? `<p class="t-body"><strong>${item.name}</strong></p>` : ''}
+        ${item.desc_en ? `<p class="t-body">${item.desc_en}</p>` : ''}
+        ${item.desc_de ? `<p class="t-body t-body--muted">${item.desc_de}</p>` : ''}
+      </div>
+    </div>
+  `;
+}
+
 /* ---- Dish Card -------------------------------------------- */
 function renderDishCard(item) {
   const icons  = YYSheets.getIcons(item);
@@ -143,10 +171,12 @@ function renderDishCard(item) {
     : null;
 
   const imgHtml = imgSrc
-    ? `<img src="${imgSrc}" alt="${item.alt || item.name + ' – Yam Yam Berlin'}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\'dish-card__img-placeholder\'>${item.name}</div>'">`
-    : `<div class="dish-card__img-placeholder">${item.name}</div>`;
+    ? `<img src="${imgSrc}" alt="${item.alt || item.name + ' – Yam Yam Berlin'}" loading="lazy" onerror="this.parentElement.style.display='none'">`
+    : '';
 
-  const idLabel = item.id ? `${item.id} ${item.name}` : item.name;
+  const idLabel = (item.id && item.id.toUpperCase() !== 'ITEM')
+    ? `${item.id} ${item.name}`
+    : item.name;
 
   const isNew = item.zusatz.trim().toLowerCase() === 'new';
   const iconsHtml = icons.map(i => `<span class="icon icon-${i}"></span>`).join('');
@@ -166,7 +196,7 @@ function renderDishCard(item) {
   return `
     <article class="dish-card">
       ${badgeHtml}
-      <div class="dish-card__img-wrap">${imgHtml}</div>
+      <div class="dish-card__img-wrap${imgHtml ? '' : ' dish-card__img-wrap--empty'}">${imgHtml}</div>
       <div class="dish-card__body">
         <div class="dish-card__title-row">
           <span class="dish-card__title">${idLabel}</span>
@@ -189,35 +219,38 @@ function renderDrinkRow(item) {
   const icons  = YYSheets.getIcons(item);
   const iconsHtml = icons.map(i => `<span class="icon icon-${i}"></span>`).join('');
 
-  const nameLabel = item.id ? `${item.name}` : item.name;
   const descHtml = item.desc_en
-    ? `<span class="drink-row__desc t-body t-body--muted">${item.desc_en}${item.desc_de ? ` · ${item.desc_de}` : ''}</span>`
-    : '';
+    ? `<div class="drink-row__desc t-body t-body--muted">${item.desc_en}${item.desc_de ? ` · ${item.desc_de}` : ''}</div>`
+    : '<div class="drink-row__desc"></div>';
   const allergenHtml = item.allergene
     ? `<span class="drink-row__allergene t-body t-body--muted">${item.allergene}</span>`
     : '';
 
+  const hasSecond = item.zusatz_2 && item.preis_2;
+  const volume2Html = hasSecond
+    ? `<span class="drink-row__volume drink-row__volume--2 t-body t-body--muted">${item.zusatz_2}</span>`
+    : '<span class="drink-row__volume drink-row__volume--2"></span>';
+  const price2Html = hasSecond
+    ? `<span class="drink-row__price drink-row__price--2">${item.preis_2}</span>`
+    : '<span class="drink-row__price drink-row__price--2"></span>';
+
   return `
     <div class="drink-row">
       <div class="drink-row__name t-body t-body--strong">
-        ${nameLabel}
+        ${item.name}
         ${iconsHtml}
-        ${descHtml}
         ${allergenHtml}
       </div>
+      ${descHtml}
       <span class="drink-row__volume t-body t-body--muted">${item.zusatz || ''}</span>
       <span class="drink-row__price">${item.preis || ''}</span>
+      ${volume2Html}
+      ${price2Html}
     </div>
   `;
 }
 
 /* ---- Helpers ---------------------------------------------- */
 function formatSubGroupLabel(key) {
-  // Clean up sheet category names for display
-  return key
-    .replace('Mandu Steamed', 'Steamed · Gedämpft')
-    .replace('Mandu Fried',   'Fried · Gebraten')
-    .replace('Vital Water Info', '')
-    .replace(/Info$/, '')
-    .trim();
+  return key;
 }

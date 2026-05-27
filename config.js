@@ -3,12 +3,17 @@
    Central config: API credentials, Sheet tabs, image mapping
    ============================================================ */
 
+const USE_STAGING_TAB =
+  window.location.hostname === 'localhost' ||
+  window.location.hostname === '127.0.0.1' ||
+  window.location.hostname.startsWith('yy.');
+
 const YY_CONFIG = {
   SHEET_ID: '1np-pFIEK8PD8OdEOArdllTTmqnhBj2Pf4ELICj1PXMU',
   API_KEY:  'AIzaSyBvBa8QqxTPDxONLFPkd8BV6aKcrpBgeGE',
 
   TABS: {
-    MENU:        'Menue',
+    MENU:        USE_STAGING_TAB ? 'Menue_Staging' : 'Menue',
     HOME:        'Home',
     ABOUT:       'About',
     JOBS:        'Jobs',
@@ -140,36 +145,40 @@ const YY_CONFIG = {
     {
       id: 'lunch',
       label: 'Lunch & Dailies',
-      types: ['Lunch Selection', 'Lunch', 'Daily Specials Info', 'Daily Specials', 'Lunch Info'],
+      types: ['Lunch'],
       layout: 'cards',
     },
     {
       id: 'starters',
       label: 'Soups & Starters',
-      types: ['Small Soups', 'Banzan', 'Yamyam Ssam Info', 'Yamyam Ssam', 'Gimbab', 'Mandu Steamed', 'Mandu Fried'],
+      types: ['Small Soups', 'Banzan', 'Yamyam Ssam', 'Gimbab', 'Mandu'],
       layout: 'cards',
+      compactCategories: ['Small Soups', 'Banzan', 'Gimbab', 'Mandu'],
     },
     {
       id: 'mains',
       label: 'Mains',
-      types: ['Soups', 'Bibimbab', 'Rice Bowls', 'Nokdu Choen', 'Bindae T Teok', 'Kids Doshirak', 'Extras'],
+      types: ['Soups', 'Bibimbab', 'Rice Bowls', 'Nokdu Choen', 'Bindae Tteok', 'Kids Doshirak', 'Extras'],
       layout: 'cards',
+      compactCategories: ['Extras'],
     },
     {
       id: 'desserts',
       label: 'Desserts',
       types: ['Desserts', 'Icecream'],
       layout: 'cards',
+      compactCategories: ['Desserts', 'Icecream'],
     },
     {
       id: 'beverages',
       label: 'Beverages',
       types: [
-        'Vital Water', 'Vital Water Info',
+        'Vital Water',
         'Homemades', 'Cold Drinks', 'Korean Beverages',
         'Wine', 'Beer', 'Longdrinks', 'Spirits',
         'Coffee', 'Tea',
-        'Premium Liquor Info', 'Premium Liquor',
+        'Korean Liquor', 'Premium Liquor',
+        'General Info',
       ],
       layout: 'list',
     },
@@ -179,15 +188,18 @@ const YY_CONFIG = {
   COL: {
     VISIBILITY: 0,
     KATEGORIE:  1,
-    ID:         2,
-    NAME:       3,
-    ZUSATZ:     4,
-    DESC_DE:    5,
-    DESC_EN:    6,
-    ALLERGENE:  7,
-    PREIS:      8,
-    ALT:        9,
-    IMG:        10,
+    SUBHEADER:  2,
+    ID:         3,
+    NAME:       4,
+    ZUSATZ:     5,
+    DESC_DE:    6,
+    DESC_EN:    7,
+    ALLERGENE:  8,
+    PREIS:      9,
+    ZUSATZ_2:   10,
+    PREIS_2:    11,
+    ALT:        12,
+    IMG:        13,
   },
 
   // Info-only row types

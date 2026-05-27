@@ -102,8 +102,10 @@
 .menu-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 32px;
   margin-bottom: var(--space-lg);
+  align-items: stretch;
+  row-gap: 24px;
+  column-gap: 16px;
 }
 
 /* Dish Card */
@@ -111,6 +113,10 @@
   position: relative;
   display: flex;
   flex-direction: column;
+  height: 100%;
+  min-height: 180px;
+  padding: 16px;
+  gap: 12px;
 }
 .dish-card__badge {
   position: absolute;
@@ -130,6 +136,9 @@
   overflow: hidden;
   background: var(--bg);
   margin-bottom: 12px;
+}
+.dish-card__img-wrap--empty {
+  display: none;
 }
 .dish-card__img-wrap img {
   width: 100%;
@@ -154,7 +163,11 @@
   letter-spacing: 0.06em;
 }
 
-.dish-card__body { flex: 1; display: flex; flex-direction: column; gap: 5px; }
+.dish-card__body { flex: 1; display: flex; flex-direction: column; gap: 5px; height: 100%; }
+.dish-card__body p {
+  line-height: 1.3;
+  margin: 0;
+}
 
 .dish-card__title-row {
   display: flex;
@@ -187,7 +200,7 @@
   text-transform: uppercase;
 }
 .dish-card__footer {
-  margin-top: var(--space-sm);
+  margin-top: auto;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -208,9 +221,9 @@
 }
 .drink-row {
   display: grid;
-  grid-template-columns: 1fr auto auto;
-  gap: 12px 16px;
-  align-items: baseline;
+  grid-template-columns: 30% 1fr 50px 60px 50px 60px;
+  gap: 12px 12px;
+  align-items: start;
   padding: 10px 0;
   border-bottom: 1px solid var(--gray-light);
 }
@@ -226,10 +239,13 @@
 .drink-row__desc {
   display: block;
   margin-top: 2px;
+  text-transform: none;
+  letter-spacing: 0;
 }
 .drink-row__volume {
   white-space: nowrap;
   text-align: right;
+  min-width: 40px;
 }
 .drink-row__price {
   font-family: var(--font-display);
@@ -266,11 +282,91 @@
 /* --- Responsive -------------------------------------------- */
 @media (max-width: 1024px) {
   .menu-grid { grid-template-columns: repeat(2, 1fr); }
-  .drink-row { grid-template-columns: 1fr auto; }
+  .drink-row { grid-template-columns: 40% 1fr auto auto auto; }
   .drink-row__volume { display: none; }
-  .drink-row--premium { grid-template-columns: 1fr auto; }
+  .drink-row--premium { grid-template-columns: 40% 1fr auto auto auto; }
+}
+
+@media (max-width: 600px) {
+  .drink-row { grid-template-columns: 1fr 40px 50px 40px 50px; }
+  .drink-row__desc { grid-column: 1 / -1; }
+  .drink-row__volume,
+  .drink-row__volume--2 { display: inline; }
 }
 @media (max-width: 767px) {
   .menu-grid { grid-template-columns: 1fr; }
   .menu-nav__btn { font-size: 18px; padding: 12px 14px; }
+}
+
+/* ---- Hero Box ------------------------------------------- */
+.menu-hero-box {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin: 24px 0;
+  align-items: center;
+}
+
+.menu-hero-box__img img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.menu-hero-box__body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+@media (max-width: 600px) {
+  .menu-hero-box {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Compact 2-column layout for small items (Banzan, Small Soups, Gimbab, Mandu, Extras, Desserts, Icecream) */
+.menu-grid--compact {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+@media (max-width: 1024px) {
+  .menu-grid--compact { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 767px) {
+  .menu-grid--compact {
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 8px;
+    row-gap: 16px;
+  }
+  .menu-grid--compact .dish-card {
+    font-size: 90%;
+    padding: 8px;
+    min-height: 140px;
+    line-height: 1.3;
+  }
+  .menu-grid--compact .dish-card__title {
+    font-size: 18px;
+    line-height: 1.1;
+  }
+  .menu-grid--compact .dish-card__img-wrap {
+    min-height: 100px;
+  }
+  .menu-grid--compact .dish-card__title-row {
+    align-items: center;
+    gap: 6px;
+  }
+  .menu-grid--compact .icon {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+  }
+  .menu-grid--compact .dish-card p {
+    line-height: 1.2;
+    margin: 0;
+  }
+  .menu-grid--compact .dish-card__body {
+    gap: 3px;
+  }
 }
