@@ -146,7 +146,7 @@ const YY_CONFIG = {
     {
       id: 'starters',
       label: 'Soups & Starters',
-      types: ['Small Soups', 'Banzan', 'Yamyam Ssam', 'Gimbab', 'Mandu Steamed', 'Mandu Fried'],
+      types: ['Small Soups', 'Banzan', 'Yamyam Ssam Info', 'Yamyam Ssam', 'Gimbab', 'Mandu Steamed', 'Mandu Fried'],
       layout: 'cards',
     },
     {
@@ -195,6 +195,7 @@ const YY_CONFIG = {
     'Info', 'Lunch Selection', 'Lunch Info',
     'Daily Specials Info', 'General Info',
     'Vital Water Info', 'Premium Liquor Info',
+    'Yamyam Ssam Info',
   ],
 
   // Helper: resolve image src from Sheet IMG field
