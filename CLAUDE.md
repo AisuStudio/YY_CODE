@@ -13,7 +13,8 @@ Stack: HTML/CSS/JS, Google Sheets als CMS, Hosting auf Strato.
 ## File Struktur
 ```
 index.html          ← Homepage (Seoul BG, Flugzeug, alle Sektionen)
-menue.html          ← Speisekarte (live aus Google Sheets)
+menue.html          ← Speisekarte (PDF-Embed, Kundenwunsch)
+menue-paused.html   ← Alte Sheet-basierte Speisekarte (pausiert, noindex)
 about.html          ← Über uns (live aus Google Sheets)
 jobs.html           ← Jobs (live aus Google Sheets)
 datenschutz.html    ← Impressum & Datenschutz (live aus Google Sheets)

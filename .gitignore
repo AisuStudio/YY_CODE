@@ -9,6 +9,7 @@
 # Documents (notes, exports)
 *.pdf
 *.csv
+!menue.pdf
 
 # Local working folders
 Backup/
