@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Menu Test — YamYam Berlin</title>
+  <title>Menu — YamYam Berlin</title>
   <meta name="robots" content="noindex, nofollow">
   <link rel="stylesheet" href="global.css">
   <link rel="stylesheet" href="cookie-banner.css">
@@ -13,24 +13,29 @@
       margin: 24px auto;
       padding: 0 var(--gap);
     }
-    .menu-pdf__frame {
+    .pdf-page {
       width: 100%;
-      height: calc(100vh - var(--nav-height) - 48px);
-      min-height: 600px;
-      border: 1px solid var(--gray-light);
+      margin-bottom: 16px;
       background: var(--bg);
     }
-    .menu-pdf__fallback {
+    .pdf-page canvas {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    .pdf-error {
       font-family: var(--font-body);
       font-size: 14px;
+      text-align: center;
+      padding: 40px 0;
     }
     @media (max-width: 900px) {
       .menu-pdf {
         margin: 16px auto;
         padding: 0 16px;
       }
-      .menu-pdf__frame {
-        height: calc(100vh - var(--nav-height) - 32px);
+      .pdf-page {
+        margin-bottom: 8px;
       }
     }
   </style>
@@ -67,12 +72,7 @@
   </nav>
 
   <main class="menu-pdf" role="main">
-    <object class="menu-pdf__frame" data="menue.pdf#toolbar=0&amp;navpanes=0&amp;scrollbar=0&amp;view=FitH" type="application/pdf">
-      <p class="menu-pdf__fallback">
-        Dein Browser kann die PDF nicht direkt anzeigen.
-        <a href="menue.pdf" target="_blank" rel="noopener">PDF herunterladen</a>.
-      </p>
-    </object>
+    <div id="pdf-viewer"></div>
   </main>
 
   <footer class="site-footer" role="contentinfo">
@@ -97,6 +97,8 @@
     }
   </script>
 
+  <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js"></script>
+  <script src="pdf-viewer.js"></script>
   <script src="cookie-banner.js" defer></script>
 </body>
 </html>
