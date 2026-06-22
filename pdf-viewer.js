@@ -42,7 +42,11 @@
       canvas.width = viewport.width;
       canvas.height = viewport.height;
       slot.wrapper.appendChild(canvas);
-      await slot.page.render({ canvasContext: canvas.getContext('2d'), viewport }).promise;
+      await slot.page.render({
+        canvasContext: canvas.getContext('2d'),
+        viewport,
+        background: 'rgba(0,0,0,0)'
+      }).promise;
     }
   }).catch((err) => {
     console.error('PDF load failed:', err);
