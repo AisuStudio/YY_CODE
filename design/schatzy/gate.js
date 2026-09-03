@@ -2,7 +2,7 @@
    Not real security (viewable in source as a hash) — just keeps
    casual visitors and search engines out of an internal test page. */
 (function () {
-  var HASH = '8844f44b46164b6e5f452debe554352ab8d88fcf55a0327b95abf02cc98247e2';
+  var HASH = '796f6bec42c9436fe3e7c1ac58cde710f02e1143a57750550b8a248baaaf88c2';
   var SESSION_KEY = 'schatzy_preview_ok';
 
   if (sessionStorage.getItem(SESSION_KEY) === '1') return;
