@@ -67,6 +67,19 @@ ul{padding:0;list-style:none}
 .strip img{width:100%;height:340px;object-fit:cover}
 .strip--tall img{height:420px}
 
+/* ---------- hero slider (crossfade) ---------- */
+.hero-slider__track{position:relative;height:340px}
+.hero-slider__slide{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1s ease}
+.hero-slider__slide.is-active{opacity:1}
+
+/* ---------- image placeholder (real photo pending) ---------- */
+.img-placeholder{
+  display:flex;align-items:center;justify-content:center;
+  width:100%;height:100%;min-height:440px;
+  background:var(--lime);color:var(--green);
+  font-weight:900;font-size:13px;letter-spacing:.1em;text-transform:uppercase;
+}
+
 /* ---------- header / footer ---------- */
 .site-header{
   position:sticky;top:0;z-index:60;background:var(--cream);
