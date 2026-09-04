@@ -86,7 +86,7 @@ ul{padding:0;list-style:none}
   padding:14px var(--gutter);
   display:flex;align-items:center;justify-content:space-between;gap:24px;
 }
-.site-header .logo{height:30px;width:auto}
+.site-header .logo{height:45px;width:auto}
 .nav{display:flex;align-items:center;gap:28px}
 .nav a{font-weight:900;font-size:14px;letter-spacing:.06em;text-transform:uppercase;color:var(--green)}
 .nav a:hover,.nav a[aria-current="page"]{color:var(--coral)}
